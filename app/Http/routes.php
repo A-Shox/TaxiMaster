@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['api']], function () {
 
-    Route::post('/test', 'TestController@doStuff');
+    Route::post('/driver/update/state', 'DriverController@updateState');
+
 });
 
