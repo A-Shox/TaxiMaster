@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DriverUpdate;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -13,9 +15,9 @@ class DriverController extends Controller
     public function updateState(Request $request)
     {
         $update = DriverUpdate::find($request->id);
-        $update->state_id = $request->state_id;
+        $update->stateId = $request->stateId;
         $update->save();
-        return json_encode(array('success' => true));
+        return array('success' => true);
     }
 
     public function updateLocation(Request $request)
@@ -24,33 +26,32 @@ class DriverController extends Controller
         $update->latitude = $request->latitude;
         $update->longitude = $request->longitude;
         $update->save();
-        return json_encode(array('success' => true));
+        return array('success' => true);
     }
 
     /**
      * @param Request $request
-     * @return success = [0 - success, 1 - incorrect password, 2 - username not exists]
+     * @return success = [0 - success, 1 - incorrect password, 2 - username not exists, -1  = error]
      */
     public function login(Request $request)
     {
+        $response = array();
         $user = User::where('username', $request->username)->first();
         if ($user != null) {
-            $response = array();
-
             if(Hash::check($request->password, $user->password)){
                 $response['success'] = 0;
 
                 unset($user->password);
-                unset($user->user_type);
-                $request['profile'] = $user;
-                return json_encode($response);
+                unset($user->userType);
+                $response['driver'] = $user;
             }
             else{
-                return json_encode(array('success' => 1));
+                $response['success'] = 1;
             }
         } else {
-            return json_encode(array('success' => 2));
+            $response['success'] = 2;
         }
+        return $response;
     }
 
 }
