@@ -34,6 +34,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['api']], function () {
 
     Route::post('/driver/update/state', 'DriverController@updateState');
+    Route::post('/driver/update/location', 'DriverController@updateLocation');
 
 });
 
