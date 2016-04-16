@@ -21,20 +21,13 @@ Route::group(['middleware' => ['web']], function () {
         return view('welcome');
     });
 
-    Route::get('/form', function () {
-        return view('form');
-    });
-
-    Route::auth();
-
-    Route::get('/home', 'HomeController@index');
-
 });
 
 Route::group(['middleware' => ['api']], function () {
 
     Route::post('/driver/update/state', 'DriverController@updateState');
     Route::post('/driver/update/location', 'DriverController@updateLocation');
+    Route::post('/driver/login', 'DriverController@login');
 
 });
 
