@@ -18,10 +18,18 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     });
-    
-    Route::get('/test', 'TestController@test');
+
+    Route::get('/map', function () {
+        return view('map');
+    });
+
+    Route::get('/test', function () {
+        return view('test');
+    });
+
+    Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
 
 });
 
@@ -30,6 +38,8 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/driver/update/state', 'DriverController@updateState');
     Route::post('/driver/update/location', 'DriverController@updateLocation');
     Route::post('/driver/login', 'DriverController@login');
+
+    Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
 
 });
 
