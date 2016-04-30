@@ -17,19 +17,15 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', function () {
-        return view('home');
+    Route::get('/dashboard', function()
+    {
+        return View::make('dashboard');
     });
 
-    Route::get('/map', function () {
-        return view('map');
+    Route::get('/login', function()
+    {
+        return View::make('login');
     });
-
-    Route::get('/test', function () {
-        return view('test');
-    });
-
-    Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
 
 });
 
