@@ -27,21 +27,30 @@
             <div class="panel panel-default">
                 <div class="panel-heading text-center"><strong>Sign In To Taxi Master</strong></div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" method="POST" action="/login">
+                        {{ csrf_field() }}
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Username" name="username" type="text"
-                                       autofocus>
+                                       autofocus required>
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password"
-                                       value="">
+                                       value="" required>
                             </div>
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success" style="width: 100%">Login</button>
                             </div>
                         </fieldset>
+
+                        @if(count($errors))
+                            @foreach($errors->all() as $error)
+                                <div class="panel panel-danger">
+                                    <div class="panel-heading">{{$error}}</div>
+                                </div>
+                            @endforeach
+                        @endif
                     </form>
                 </div>
             </div>

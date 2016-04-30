@@ -27,13 +27,21 @@ Route::group(['middleware' => ['web']], function () {
         return View::make('login');
     });
 
+    Route::get('/', function()
+    {
+        return View::make('index');
+    });
+
+    Route::post('/login', 'AuthController@loginWeb');
+    Route::get('/updates', 'WebController@getDriverUpdates');
+
 });
 
 Route::group(['middleware' => ['api']], function () {
 
     Route::post('/driver/update/state', 'DriverController@updateState');
     Route::post('/driver/update/location', 'DriverController@updateLocation');
-    Route::post('/driver/login', 'DriverController@login');
+    Route::post('/driver/login', 'AuthController@loginDriver');
 
     Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
 
