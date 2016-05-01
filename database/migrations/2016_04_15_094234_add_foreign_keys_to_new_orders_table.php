@@ -13,10 +13,10 @@ class AddForeignKeysToNewOrdersTable extends Migration
     public function up()
     {
         Schema::table('new_orders', function (Blueprint $table) {
-            $table->integer('taxi_driver_user_id')->unsigned();
-            $table->foreign('taxi_driver_user_id')->references('user_id')->on('taxi_drivers');
-            $table->integer('taxi_operator_user_id')->unsigned()->nullable();
-            $table->foreign('taxi_operator_user_id')->references('user_id')->on('taxi_operators');
+            $table->integer('taxiDriverUserId')->unsigned();
+            $table->foreign('taxiDriverUserId')->references('id')->on('taxi_drivers');
+            $table->integer('taxiOperatorUserId')->unsigned()->nullable();
+            $table->foreign('taxiOperatorUserId')->references('id')->on('taxi_operators');
         });
     }
 

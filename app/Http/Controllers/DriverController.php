@@ -26,6 +26,7 @@ class DriverController extends Controller
         $update = DriverUpdate::find($request->id);
         $update->latitude = $request->latitude;
         $update->longitude = $request->longitude;
+        $update->updated_at = Carbon::now()->toDateTimeString();
         $update->save();
         return array('success' => true);
     }

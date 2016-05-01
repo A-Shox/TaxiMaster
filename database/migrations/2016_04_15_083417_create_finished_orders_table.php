@@ -14,14 +14,14 @@ class CreateFinishedOrdersTable extends Migration
     {
         Schema::create('finished_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
-            $table->text('start_location');
-            $table->text('end_location');
+            $table->timestamp('startTime');
+            $table->timestamp('endTime');
+            $table->text('startLocation');
+            $table->text('endLocation');
             $table->double('distance', 10, 3);
-            $table->string('customer_phone', 15);
+            $table->string('customerPhone', 15);
             $table->integer('fare');
-            $table->string('order_type', 10);
+            $table->string('orderType', 10);
         });
     }
 

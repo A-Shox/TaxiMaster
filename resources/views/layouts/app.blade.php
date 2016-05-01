@@ -40,7 +40,7 @@
     <style>
         html, body, #wrapper{
             height:100%;
-            /*overflow: hidden;*/
+            overflow: hidden;
         }
     </style>
 

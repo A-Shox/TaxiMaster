@@ -16,12 +16,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('username', 20)->unique();
             $table->string('password', 100);
-            $table->string('first_name', 45);
-            $table->string('last_name', 45);
+            $table->string('firstName', 45);
+            $table->string('lastName', 45);
             $table->string('phone', 15)->unique();
-            $table->string('user_type', 10);
+            $table->string('userType', 10);
 
-            $table->unique(array('first_name', 'last_name'));
+            $table->unique(array('firstName', 'lastName'));
         });
     }
 

@@ -60,7 +60,7 @@ class AuthController extends Controller
      */
     public function loginWeb(Request $request)
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userType' => 'WEB'])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userType' => 'ADMIN']) || Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userType' => 'TAXI_OPERATOR'])) {
             return redirect()->intended('dashboard');
         }
         else{

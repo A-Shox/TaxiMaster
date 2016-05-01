@@ -13,7 +13,7 @@ class CreateTaxiDriversTable extends Migration
     public function up()
     {
         Schema::create('taxi_drivers', function (Blueprint $table) {
-            $table->string('licence_no', 20);
+            $table->string('licenceNo', 20);
         });
     }
 

@@ -41,7 +41,7 @@ Route::group(['middleware' => ['api']], function () {
 
     Route::post('/driver/update/state', 'DriverController@updateState');
     Route::post('/driver/update/location', 'DriverController@updateLocation');
-    Route::post('/driver/login', 'AuthController@loginDriver');
+    Route::post('/driver/login', 'AuthController@loginDriver'); 
 
     Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
 

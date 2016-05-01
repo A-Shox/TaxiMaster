@@ -13,9 +13,9 @@ class CreateTaxiOperatorsTable extends Migration
     public function up()
     {
         Schema::create('taxi_operators', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->primary('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

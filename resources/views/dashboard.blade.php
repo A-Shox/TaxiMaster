@@ -27,10 +27,10 @@
                 <div class="panel-heading text-center"><strong>Show only</strong></div>
 
                 <div class="panel-body">
-                    <button type="button" class="btn btn-success filter-btn">AVAILABLE</button>
-                    <button type="button" class="btn btn-default filter-btn">GOING FOR HIRE</button>
-                    <button type="button" class="btn btn-default filter-btn">IN HIRE</button>
-                    <button type="button" class="btn btn-default filter-btn">NOT IN SERVICE</button>
+                    <button type="button" class="btn btn-success filter-btn" value="1" name="available">AVAILABLE</button>
+                    <button type="button" class="btn btn-default filter-btn" value="0" name="goingForHire">GOING FOR HIRE</button>
+                    <button type="button" class="btn btn-default filter-btn" value="0" name="inHire">IN HIRE</button>
+                    <button type="button" class="btn btn-default filter-btn" value="0" name="notInService">NOT IN SERVICE</button>
                 </div>
             </div>
 
@@ -72,12 +72,20 @@
     <script type="text/javascript">
 
         function loadLocations() {
-            $.ajax({
-                url:"",
-                success:function(){
+            var notInService = $("[name='notInService']").val();
+            var available = $("[name='available']").val();
+            var goingForHire = $("[name='goingForHire']").val();
+            var inHire = $("[name='inHire']").val();
 
+            var url = "/updates?notInService=" + notInService + "&available=" + available + "&goingForHire=" + goingForHire + "&inHire=" + inHire;
+
+            $.ajax({
+                type:"GET",
+                url:url,
+                success:function (result) {
+                    setMarkers(result)
                 },
-                dataType:json
+                dataType:'json'
             });
         }
 
@@ -88,7 +96,13 @@
             }
         }
 
-        function setMarkers(){
+        function setMarkers(locations){
+            $.each(locations, function (state, taxis) {
+                $.each(taxis, function (key, taxi) {
+                    $item = {'latitude' : taxi.latitude, 'longitude' : taxi.longitude};
+                    alert($item.latitude);
+                })
+            });
             var infowindow = new google.maps.InfoWindow();
 
             var marker, i;
@@ -112,5 +126,12 @@
         }
     </script>
 
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                loadLocations();
+            }, 1000)
+        });
+    </script>
 
 @stop

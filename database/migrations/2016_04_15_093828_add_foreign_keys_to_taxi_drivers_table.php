@@ -13,11 +13,11 @@ class AddForeignKeysToTaxiDriversTable extends Migration
     public function up()
     {
         Schema::table('taxi_drivers', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->primary('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('taxi_id')->unsigned();
-            $table->foreign('taxi_id')->references('id')->on('taxis');
+            $table->integer('id')->unsigned();
+            $table->primary('id');
+            $table->foreign('id')->references('id')->on('users');
+            $table->integer('taxiId')->unsigned();
+            $table->foreign('taxiId')->references('id')->on('taxis');
         });
     }
 
