@@ -41,7 +41,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('/login', 'AuthController@loginWeb');
     Route::get('/logout', 'AuthController@logoutWeb');
-//    Route::get('/updates', 'WebController@getDriverUpdates');
 
     Route::get('/updates', 'WebController@getDriverUpdates');
 
