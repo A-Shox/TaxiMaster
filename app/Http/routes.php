@@ -16,23 +16,33 @@
 //Route::post('/test', 'TestController@doStuff');
 
 Route::group(['middleware' => ['web']], function () {
+    
+    Route::get("/test", "TestController@test");
 
     Route::get('/dashboard', function()
     {
-        return View::make('dashboard');
+        if(Auth::check()){
+            return View::make('dashboard');
+        }
+        else{
+            return redirect("/login");
+        }
     });
 
     Route::get('/login', function()
     {
-        return View::make('login');
-    });
-
-    Route::get('/', function()
-    {
-        return View::make('index');
+        if(Auth::check()){
+            return redirect("/dashboard");
+        }
+        else{
+            return View::make('login');
+        }
     });
 
     Route::post('/login', 'AuthController@loginWeb');
+    Route::get('/logout', 'AuthController@logoutWeb');
+//    Route::get('/updates', 'WebController@getDriverUpdates');
+
     Route::get('/updates', 'WebController@getDriverUpdates');
 
 });

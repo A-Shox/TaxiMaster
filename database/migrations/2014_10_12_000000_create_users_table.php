@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('firstName', 45);
             $table->string('lastName', 45);
             $table->string('phone', 15)->unique();
-            $table->string('userType', 10);
+            $table->string('userType', 15);
 
             $table->unique(array('firstName', 'lastName'));
         });

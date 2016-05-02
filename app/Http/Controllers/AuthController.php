@@ -68,4 +68,14 @@ class AuthController extends Controller
             return back()->withErrors($errors);
         }
     }
+
+    public function logoutWeb(Request $request)
+    {
+        try{
+            Auth::logout();
+        }
+        finally{
+            return redirect("/login");
+        }
+    }
 }

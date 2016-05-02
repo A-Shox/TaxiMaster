@@ -10,6 +10,6 @@ use App\Http\Requests;
 class TestController extends Controller
 {
     public function test(){
-        return User::first();
+        return Auth\Auth::user()->firstName;
     }
 }

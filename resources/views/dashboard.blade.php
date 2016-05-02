@@ -20,22 +20,42 @@
         <div id="map" class="col-lg-10"></div>
         <!-- Map end -->
 
-        <!-- Filter panel start -->
-        <div id="filter-panel" class="col-lg-2" style="padding: 0; margin: 0;">
+        <div class="col-lg-2" style="padding: 0; margin: 0;">
 
-            <div class="panel panel-default">
-                <div class="panel-heading text-center"><strong>Show only</strong></div>
+            <!-- State filter panel start -->
+            <div class="col-lg-12" style="padding: 0; margin: 0;">
 
-                <div class="panel-body">
-                    <button type="button" class="btn btn-success filter-btn" value="1" name="available">AVAILABLE</button>
-                    <button type="button" class="btn btn-default filter-btn" value="0" name="goingForHire">GOING FOR HIRE</button>
-                    <button type="button" class="btn btn-default filter-btn" value="0" name="inHire">IN HIRE</button>
-                    <button type="button" class="btn btn-default filter-btn" value="0" name="notInService">NOT IN SERVICE</button>
+                <div class="panel panel-default" style="padding: 0; margin: 0;">
+                    <div class="panel-heading text-center"><strong>DRIVER STATE</strong></div>
+
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-success filter-state-btn" value="1" name="available">AVAILABLE</button>
+                        <button type="button" class="btn btn-default filter-state-btn" value="0" name="goingForHire">GOING FOR HIRE</button>
+                        <button type="button" class="btn btn-default filter-state-btn" value="0" name="inHire">IN HIRE</button>
+                        <button type="button" class="btn btn-default filter-state-btn" value="0" name="notInService">NOT IN SERVICE</button>
+                    </div>
                 </div>
+
             </div>
+            <!-- State filter panel end -->
+
+            <!-- Filter panel start -->
+            <div class="col-lg-12" style="padding: 0; margin: 0;">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center"><strong>TAXI TYPE</strong></div>
+
+                    <div class="panel-body">
+                        <button type="button" class="btn btn-info filter-type-btn" value="1" name="nano">NANO</button>
+                        <button type="button" class="btn btn-info filter-type-btn" value="1" name="car">CAR</button>
+                        <button type="button" class="btn btn-info filter-type-btn" value="1" name="van">VAN</button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Filter panel end -->
 
         </div>
-        <!-- Filter panel end -->
 
     </div>
 
@@ -60,11 +80,34 @@
             async defer>
     </script>
 
-    <!-- Filter panel button clicks -->
+    <!-- Driver state filter panel button clicks -->
     <script>
 
-        $(".filter-btn").click(function () {
+        $(".filter-state-btn").click(function () {
             $(this).toggleClass("btn-success");
+            if(this.value==0){
+                this.value=1;
+            }
+            else{
+                this.value=0;
+            }
+            loadLocations();
+        });
+
+    </script>
+
+    <!-- Taxi type filter panel button clicks -->
+    <script>
+
+        $(".filter-type-btn").click(function () {
+            $(this).toggleClass("btn-info");
+            if(this.value==0){
+                this.value=1;
+            }
+            else{
+                this.value=0;
+            }
+            loadLocations();
         });
 
     </script>
@@ -77,11 +120,12 @@
             var goingForHire = $("[name='goingForHire']").val();
             var inHire = $("[name='inHire']").val();
 
-            var url = "/updates?notInService=" + notInService + "&available=" + available + "&goingForHire=" + goingForHire + "&inHire=" + inHire;
+            var url = "/updates";
 
             $.ajax({
                 type:"GET",
                 url:url,
+                data: { notInService:notInService, available: available, goingForHire: goingForHire,inHire:inHire },
                 success:function (result) {
                     clearMarkers();
                     setMarkers(result)
@@ -95,9 +139,14 @@
             for(i=0;i<markers.length;i++){
                 markers[i].setMap(null);
             }
+            markers = [];
         }
 
         function setMarkers(updates){
+            var nano = $("[name='nano']").val();
+            var car = $("[name='car']").val();
+            var van = $("[name='van']").val();
+
             var infowindow = new google.maps.InfoWindow();
 
             var marker, i;
@@ -105,19 +154,21 @@
 
             $.each(updates, function (key, updateSet) {
                 $.each(updateSet, function (key, update) {
-                    marker = new google.maps.Marker({
-                        position: new google.maps.LatLng(update.latitude, update.longitude),
-                        map: map
-                    });
+                    if((update.taxi_type === "Nano" && nano==1) || (update.taxi_type === "Car" && car==1) || (update.taxi_type === "Van" && van==1)){
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(update.latitude, update.longitude),
+                            map: map
+                        });
 
-                    markers.push(marker);
+                        markers.push(marker);
 
-                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                        return function() {
-                            infowindow.setContent("<strong>" + update.name + "</strong>" + "<br>" + update.taxi_model);
-                            infowindow.open(map, marker);
-                        }
-                    })(marker, i));
+                        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                infowindow.setContent("<strong>" + update.name + "</strong>" + "<br>" + update.taxi_model);
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
+                    }
                 })
             });
         }
