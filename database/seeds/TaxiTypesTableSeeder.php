@@ -11,8 +11,8 @@ class TaxiTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        (new \App\TaxiTypes(['name'=>"NANO_CAB"]))->save();
-        (new \App\TaxiTypes(['name'=>"CAR"]))->save();
-        (new \App\TaxiTypes(['name'=>"VAN"]))->save();
+        (new \App\TaxiTypes(['name'=>"Nano"]))->save();
+        (new \App\TaxiTypes(['name'=>"Car"]))->save();
+        (new \App\TaxiTypes(['name'=>"Van"]))->save();
     }
 }

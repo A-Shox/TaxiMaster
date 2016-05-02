@@ -83,6 +83,7 @@
                 type:"GET",
                 url:url,
                 success:function (result) {
+                    clearMarkers();
                     setMarkers(result)
                 },
                 dataType:'json'
@@ -96,33 +97,29 @@
             }
         }
 
-        function setMarkers(locations){
-            $.each(locations, function (state, taxis) {
-                $.each(taxis, function (key, taxi) {
-                    $item = {'latitude' : taxi.latitude, 'longitude' : taxi.longitude};
-                    alert($item.latitude);
-                })
-            });
+        function setMarkers(updates){
             var infowindow = new google.maps.InfoWindow();
 
             var marker, i;
             markers = [];
 
-            for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map
-                });
+            $.each(updates, function (key, updateSet) {
+                $.each(updateSet, function (key, update) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(update.latitude, update.longitude),
+                        map: map
+                    });
 
-                markers.push(marker);
+                    markers.push(marker);
 
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        infowindow.setContent(locations[i][0]);
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-            }
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent("<strong>" + update.name + "</strong>" + "<br>" + update.taxi_model);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                })
+            });
         }
     </script>
 
@@ -130,7 +127,7 @@
         $(document).ready(function () {
             setInterval(function () {
                 loadLocations();
-            }, 1000)
+            }, 5000)
         });
     </script>
 
