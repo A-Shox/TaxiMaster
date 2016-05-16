@@ -21,4 +21,13 @@ class UserController extends Controller
     public function showEditPage(User $user){
         return view('editaccount', compact('user'));
     }
+
+    public function updateUser(Request $request){
+        $user = User::where('username', $request->username)->first();
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->phone = $request->phone;
+        $user->save();
+        
+    }
 }

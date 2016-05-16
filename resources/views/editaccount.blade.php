@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="firstname">First name</label>
                     <div class="col-md-4">
-                        <input id="firstname" name="firstname" type="text" placeholder="First name" class="form-control input-md" value="{{$user->firstName}}">
+                        <input id="firstname" name="firstName" type="text" placeholder="First name" class="form-control input-md" value="{{$user->firstName}}" required>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="lastname">Last name</label>
                     <div class="col-md-4">
-                        <input id="lastname" name="lastname" type="text" placeholder="Last name" class="form-control input-md" value="{{$user->lastName}}">
+                        <input id="lastname" name="lastName" type="text" placeholder="Last name" class="form-control input-md" value="{{$user->lastName}}" required>
 
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="phone">Mobile phone</label>
                     <div class="col-md-4">
-                        <input id="phone" name="phone" type="text" placeholder="Enter a mobile phone number" class="form-control input-md" value="{{$user->phone}}">
+                        <input id="phone" name="phone" type="text" placeholder="Enter a mobile phone number" class="form-control input-md" value="{{$user->phone}}" required>
 
                     </div>
                 </div>

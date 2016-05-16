@@ -141,6 +141,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/accounts/delete/{id}', 'UserController@deleteUser');
     Route::get('/accounts/view/{user}', 'UserController@showViewPage');
     Route::get('/accounts/edit/{user}', 'UserController@showEditPage');
+    Route::get('/accounts/update/{user}', 'UserController@updateUser');
 
 });
 
