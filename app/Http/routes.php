@@ -111,16 +111,6 @@ Route::group(['middleware' => ['web']], function () {
             return redirect("/login");
         }
     });
-    
-    Route::get('/accounts/edit/{user}', function()
-    {
-        if(Auth::check()){
-            return View::make('editaccount');
-        }
-        else{
-            return redirect("/login");
-        }
-    });
 
     Route::get('/taxis/new', function()
     {
@@ -149,6 +139,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/updates', 'WebController@getDriverUpdates');
 
     Route::get('/accounts/delete/{id}', 'UserController@deleteUser');
+    Route::get('/accounts/view/{user}', 'UserController@showViewPage');
+    Route::get('/accounts/edit/{user}', 'UserController@showEditPage');
 
 });
 
