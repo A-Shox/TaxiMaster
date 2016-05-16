@@ -12,23 +12,23 @@
     <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="../css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
+    <link href="../css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,22 +84,22 @@
                     <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-plus"></i> New Hire</a>
+                    <a href="/newhire "><i class="fa fa-fw fa-plus"></i> New Hire</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-clock-o"></i> On Going Orders</a>
+                    <a href="/ongoing-orders"><i class="fa fa-fw fa-clock-o"></i> On Going Orders</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-history"></i> Order History</a>
+                    <a href="/orderhistory"><i class="fa fa-fw fa-history"></i> Order History</a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-users"></i> Accounts <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> New Account</a>
+                            <a href="/accounts/new"><i class="fa fa-fw fa-user"></i> New Account</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-pencil-square-o"></i> Edit Account</a>
+                            <a href="/accounts/view"><i class="fa fa-fw fa-list"></i> View Accounts</a>
                         </li>
                     </ul>
                 </li>
@@ -107,10 +107,10 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-taxi"></i> Taxis <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo1" class="collapse">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-plus"></i> New Taxi</a>
+                            <a href="/taxis/new"><i class="fa fa-fw fa-plus"></i> New Taxi</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-pencil-square-o"></i> Edit Taxi</a>
+                            <a href="/taxis/edit"><i class="fa fa-fw fa-pencil-square-o"></i> Edit Taxi</a>
                         </li>
                     </ul>
                 </li>
@@ -127,9 +127,9 @@
 <!-- /#wrapper -->
 
 <!-- Morris Charts JavaScript -->
-<script src="js/plugins/morris/raphael.min.js"></script>
-<script src="js/plugins/morris/morris.min.js"></script>
-<script src="js/plugins/morris/morris-data.js"></script>
+<script src="../js/plugins/morris/raphael.min.js"></script>
+<script src="../js/plugins/morris/morris.min.js"></script>
+<script src="../js/plugins/morris/morris-data.js"></script>
 
 </body>
 

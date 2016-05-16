@@ -13,8 +13,8 @@ class AddForeignKeysToFisnishedOrdersTable extends Migration
     public function up()
     {
         Schema::table('finished_orders', function (Blueprint $table) {
-            $table->integer('taxiDriverDserId')->unsigned();
-            $table->foreign('taxiDriverDserId')->references('id')->on('taxi_drivers');
+            $table->integer('taxiDriverId')->unsigned();
+            $table->foreign('taxiDriverId')->references('id')->on('taxi_drivers');
             $table->integer('taxiId')->unsigned();
             $table->foreign('taxiId')->references('id')->on('taxis');
             $table->integer('taxiOperatorUserId')->unsigned()->nullable();

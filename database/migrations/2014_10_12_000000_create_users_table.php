@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('lastName', 45);
             $table->string('phone', 15)->unique();
             $table->string('userType', 15);
+            $table->boolean('isActive');
 
             $table->unique(array('firstName', 'lastName'));
         });
