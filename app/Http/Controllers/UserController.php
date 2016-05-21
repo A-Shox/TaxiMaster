@@ -10,10 +10,6 @@ use App\User;
 
 class UserController extends Controller
 {
-    public function deleteUser(Request $request){
-        return json_encode(User::where('id', $request->id)->update(['isActive'=> false]));
-    }
-
     public function showViewPage(User $user){
         return view('viewaccount', compact('user'));
     }
@@ -22,12 +18,23 @@ class UserController extends Controller
         return view('editaccount', compact('user'));
     }
 
+    public function deleteUser(Request $request){
+        return json_encode(User::where('id', $request->id)->update(['isActive'=> false]));
+    }
+
     public function updateUser(Request $request){
         $user = User::where('username', $request->username)->first();
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;
         $user->phone = $request->phone;
-        $user->save();
+        $result = $user->save();
         
+        if($result){
+            return redirect('/accounts/view');
+        }
+        else{
+            $errors = new MessageBag(['msg' => 'Username or password is incorrect']);
+            return back()->withErrors($errors);
+        }
     }
 }

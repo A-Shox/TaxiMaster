@@ -102,15 +102,15 @@ Route::group(['middleware' => ['web']], function () {
         }
     });
 
-    Route::get('/accounts/view/{user}', function()
-    {
-        if(Auth::check()){
-            return View::make('editaccount');
-        }
-        else{
-            return redirect("/login");
-        }
-    });
+//    Route::get('/accounts/view/{user}', function()
+//    {
+//        if(Auth::check()){
+//            return View::make('editaccount');
+//        }
+//        else{
+//            return redirect("/login");
+//        }
+//    });
 
     Route::get('/taxis/new', function()
     {

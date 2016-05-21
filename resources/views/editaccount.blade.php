@@ -16,15 +16,16 @@
     </div>
 
     <div class="row">
-        <form class="form-horizontal">
+        <form class="form-horizontal" action="/accounts/update/{{$user->username}}">
             <fieldset>
+                {{csrf_field()}}
 
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="username">Username</label>
                     <div class="col-md-4">
-                        <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" disabled value="{{$user->username}}">
-                    </div>
+                        <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" readonly='true' value="{{$user->username}}">
+                        </div>
                 </div>
 
                 <!-- Text input-->
@@ -58,7 +59,7 @@
                     <label class="col-md-4 control-label" for="button1id"></label>
                     <div class="col-md-8">
                         <button id="button1id" name="button1id" class="btn btn-default" onclick="back()">Cancel</button>
-                        <button id="" name="" class="btn btn-info">Save</button>
+                        <button id="" class="btn btn-info" type="submit">Save</button>
                     </div>
                 </div>
 
