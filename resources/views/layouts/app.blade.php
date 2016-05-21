@@ -38,16 +38,19 @@
     <![endif]-->
 
     <style>
-        html, body, #wrapper{
-            height:100%;
-            overflow: hidden;
+        html, body, #wrapper {
+            height: 100%;
+            /*overflow: hidden;*/
         }
+
+        html,body { height: 100%; }
+        #page-wrapper { height: 100% }
+
     </style>
 
 </head>
 
 <body>
-
 <div id="wrapper">
 
     <!-- Navigation -->
@@ -65,7 +68,9 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Auth::user()->firstName . ' ' . Auth::user() ->lastName}} <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                            class="fa fa-user"></i> {{ Auth::user()->firstName . ' ' . Auth::user() ->lastName}} <b
+                            class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -93,7 +98,8 @@
                     <a href="/orderhistory"><i class="fa fa-fw fa-history"></i> Order History</a>
                 </li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-users"></i> Accounts <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-users"></i>
+                        Accounts <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
                             <a href="/accounts/new"><i class="fa fa-fw fa-user"></i> New Account</a>
@@ -104,7 +110,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-taxi"></i> Taxis <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-taxi"></i>
+                        Taxis <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo1" class="collapse">
                         <li>
                             <a href="/taxis/new"><i class="fa fa-fw fa-plus"></i> New Taxi</a>

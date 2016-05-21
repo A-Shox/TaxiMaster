@@ -10,7 +10,7 @@ class AuthControllerTest extends TestCase
     public function testLoginDriver()
     {
         $response = $this->action('POST', 'AuthController@loginDriver', ['username' => 'anuradha', 'password' => 'anuradha', 'userType' => 'DRIVER']);
-        $this->assertEquals('{"success":0,"driver":{"id":2,"username":"anuradha","firstName":"Anuradha","lastName":"Wickramrachchi","phone":"0712755777"}}', $response->getContent());
+        $this->assertEquals('{"success":0,"driver":{"id":2,"username":"anuradha","firstName":"Anuradha","lastName":"Wickramrachchi","phone":"0712755777","isActive":1}}', $response->getContent());
     }
 
     public function testLoginWeb()

@@ -14,6 +14,14 @@
         }
     </style>
 
+    <style>
+        html, body, #wrapper {
+            overflow: hidden;
+        }
+
+    </style>
+
+
     <div class="row">
 
         <!-- Map start -->
@@ -58,7 +66,6 @@
         </div>
 
     </div>
-
     <!-- Initialize the map -->
     <script>
         function initMap() {

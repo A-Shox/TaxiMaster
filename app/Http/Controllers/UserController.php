@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\User;
+use Hash;
+use Illuminate\Support\MessageBag;
 
 class UserController extends Controller
 {
@@ -36,5 +38,33 @@ class UserController extends Controller
             $errors = new MessageBag(['msg' => 'Username or password is incorrect']);
             return back()->withErrors($errors);
         }
+    }
+    
+    public function createNewUser(Request $request){
+        $user = new User;
+        if($request->userType == 1){
+            $user->userType = 'ADMIN';
+        }
+        else if($request->userType == 2){
+            $user->userType = 'DRIVER';
+        }
+        else if($request->userType == 3){
+            $user->userType = 'TAXI_OPERATOR';
+        }
+
+        $user->username = $request->username;
+        $user->firstName = $request->firstName;
+        $user->lastName = $request->lastName;
+        $user->phone = $request->phone;
+        $user->password = Hash::make($request->password);
+
+        try{
+            $user->save();
+        }
+        catch (\Exception $e){
+            $errors = new MessageBag(['msg' => 'Something went wrong. Please try again!']);
+            return back()->withErrors($errors);
+        }
+        return redirect('/accounts/view');
     }
 }

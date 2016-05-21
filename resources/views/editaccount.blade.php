@@ -16,7 +16,7 @@
     </div>
 
     <div class="row">
-        <form class="form-horizontal" action="/accounts/update/{{$user->username}}">
+        <form class="form-horizontal" action="/accounts/update/{{$user->username}}" method="POST">
             <fieldset>
                 {{csrf_field()}}
 
