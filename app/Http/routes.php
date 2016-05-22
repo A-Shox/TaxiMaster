@@ -133,6 +133,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/accounts/edit/{user}', 'UserController@showEditPage');
     Route::post('/accounts/update/{user}', 'UserController@updateUser');
     Route::post('/accounts/new', 'UserController@createNewUser');
+    Route::get('/taxis/new', 'TaxiController@showNewTaxiPage');
+    Route::post('/taxis/new', 'TaxiController@createNewTaxi');
 });
 
 Route::group(['middleware' => ['api']], function () {
