@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\User;
+use App\TaxiDriver;
+use App\Taxi;
+use App\DriverUpdate;
 use Hash;
 use Illuminate\Support\MessageBag;
 
@@ -18,6 +21,11 @@ class UserController extends Controller
 
     public function showEditPage(User $user){
         return view('editaccount', compact('user'));
+    }
+    
+    public function showNewUserPage(){
+        $taxis = Taxi::whereNotIn('id',TaxiDriver::whereNotNull('taxiId')->get(['taxiId']))->get();
+        return view('newAccount', compact('taxis'));
     }
 
     public function deleteUser(Request $request){
@@ -66,9 +74,29 @@ class UserController extends Controller
 
         try{
             $user->save();
+
+            if($request->userType == 2){
+                $user = User::where(['username'=>$request->username])->first();
+                $taxiDriver = new TaxiDriver;
+                $taxiDriver->licenceNo = $request->licenceNo;
+                if($request->taxiId===null || $request->taxiId===''){
+                    $taxiDriver->taxiId = null;
+                }
+                else{
+                    $taxiDriver->taxiId = $request->taxiId;
+                }
+                $user->taxiDriver()->save($taxiDriver);
+
+                $taxiDriver = TaxiDriver::find($user->id);
+                $driverUpdate = new DriverUpdate;
+                $driverUpdate->latitude = 0.0;
+                $driverUpdate->longitude = 0.0;
+                $driverUpdate->stateId = 1;
+                $taxiDriver->driverUpdate()->save($driverUpdate);
+            }
         }
         catch (\Exception $e){
-            $errors = new MessageBag(['msg' => 'Something went wrong. Please try again!']);
+            $errors = new MessageBag(['msg' => $e . 'Something went wrong. Please try again!']);
             return back()->withErrors($errors);
         }
         return redirect('/accounts/view');

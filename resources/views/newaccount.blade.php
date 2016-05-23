@@ -28,9 +28,9 @@
                         {{csrf_field()}}
                                 <!-- Select Basic -->
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="selectbasic">User type</label>
+                            <label class="col-md-4 control-label" for="userType">User type</label>
                             <div class="col-md-4">
-                                <select id="selectbasic" name="userType" class="form-control" required>
+                                <select id="userType" name="userType" class="form-control" required>
                                     <option value="">-- Select one --</option>
                                     <option value="1">Admin</option>
                                     <option value="2">Taxi Driver</option>
@@ -79,11 +79,34 @@
                             </div>
                         </div>
 
+                        <!-- Text input-->
+                        <div id="licenceNoDiv" class="form-group" style="display: none;">
+                            <label class="col-md-4 control-label" for="licenceNo">Licence Number</label>
+                            <div class="col-md-4">
+                                <input id="licenceNo" name="licenceNo" type="text" placeholder="Enter lience number of new driver"
+                                       class="form-control input-md" required>
+
+                            </div>
+                        </div>
+
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="taxiId">Taxi</label>
+                            <div class="col-md-4">
+                                <select id="taxiId" name="taxiId" class="form-control">
+                                    <option value="">-- Select one --</option>
+                                    @foreach($taxis as $taxi)
+                                        <option value={{$taxi->id}}>{{$taxi->registeredNo . ' - ' . $taxi->model}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <!-- Password input-->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="password">Password</label>
                             <div class="col-md-4">
-                                <input id="password" name="password" type="password" placeholder="Enter password"
+                                <input id="password" name="password" type="password" placeholder="Password should be 6 to 15 characters long"
                                        class="form-control input-md" minlength="6" maxlength="15" type="text">
                             </div>
                         </div>
@@ -92,7 +115,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="repassword">Confirm Password</label>
                             <div class="col-md-4">
-                                <input id="rePassword" name="rePassword" type="password" placeholder="Re enter password"
+                                <input id="rePassword" name="rePassword" type="password" placeholder="Confirm password"
                                        class="form-control input-md">
                             </div>
                         </div>
@@ -100,7 +123,7 @@
                         <div id="password_error" class="form-group" style="display: none;">
                             <label class="col-md-4 control-label" for=""></label>
                             <div id="password_error" class="col-md-4">
-                                <p class="text-danger">Password mismuatch.</p>
+                                <p class="text-danger">Password mismatch.</p>
                             </div>
                         </div>
 
@@ -153,6 +176,20 @@
         });
 
         $('#new_account_form').validate();
+
+        $('#userType').on('change', function () {
+            userType = $('#userType').val();
+
+            if(userType==1){
+                $('#licenceNoDiv').hide();
+            }
+            else if(userType==2){
+                $('#licenceNoDiv').show();
+            }
+            else if(userType==3){
+                $('#licenceNoDiv').hide();
+            }
+        });
 
     </script>
 @stop

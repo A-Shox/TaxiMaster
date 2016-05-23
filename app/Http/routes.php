@@ -82,16 +82,6 @@ Route::group(['middleware' => ['web']], function () {
         }
     });
 
-    Route::get('accounts/new', function()
-    {
-        if(Auth::check()){
-            return View::make('newaccount');
-        }
-        else{
-            return redirect("/login");
-        }
-    });
-
     Route::get('/accounts/view', function()
     {
         if(Auth::check()){
@@ -132,6 +122,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/accounts/view/{user}', 'UserController@showViewPage');
     Route::get('/accounts/edit/{user}', 'UserController@showEditPage');
     Route::post('/accounts/update/{user}', 'UserController@updateUser');
+    Route::get('/accounts/new', 'UserController@showNewUserPage');
     Route::post('/accounts/new', 'UserController@createNewUser');
     Route::get('/taxis/new', 'TaxiController@showNewTaxiPage');
     Route::post('/taxis/new', 'TaxiController@createNewTaxi');

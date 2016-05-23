@@ -16,7 +16,7 @@ class AddForeignKeysToTaxiDriversTable extends Migration
             $table->integer('id')->unsigned();
             $table->primary('id');
             $table->foreign('id')->references('id')->on('users');
-            $table->integer('taxiId')->unsigned()->unique();
+            $table->integer('taxiId')->unsigned()->unique()->nullable();
             $table->foreign('taxiId')->references('id')->on('taxis');
         });
     }

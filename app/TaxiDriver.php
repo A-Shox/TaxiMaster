@@ -16,4 +16,8 @@ class TaxiDriver extends Model
         return $this->belongsTo(Taxi::class, 'taxiId', 'id');
     }
 
+    public function driverUpdate(){
+        return $this->hasOne(DriverUpdate::class, 'id', 'id');
+    }
+
 }

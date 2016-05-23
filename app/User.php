@@ -8,4 +8,7 @@ class User extends Authenticatable
 {
     public $timestamps = false;
     
+    public function taxiDriver(){
+      return $this->hasOne(TaxiDriver::class, 'id', 'id');
+    }
 }
