@@ -124,6 +124,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/accounts/update/{user}', 'UserController@updateUser');
     Route::get('/accounts/new', 'UserController@showNewUserPage');
     Route::post('/accounts/new', 'UserController@createNewUser');
+
     Route::get('/taxis/new', 'TaxiController@showNewTaxiPage');
     Route::post('/taxis/new', 'TaxiController@createNewTaxi');
 });
@@ -135,6 +136,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/driver/login', 'AuthController@loginDriver'); 
 
     Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
+    Route::post('/customer/order/new', 'CustomerController@placeOrder');
 
 });
 

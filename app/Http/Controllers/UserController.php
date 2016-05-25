@@ -96,7 +96,7 @@ class UserController extends Controller
             }
         }
         catch (\Exception $e){
-            $errors = new MessageBag(['msg' => $e . 'Something went wrong. Please try again!']);
+            $errors = new MessageBag(['msg' => 'Something went wrong. Please try again!']);
             return back()->withErrors($errors);
         }
         return redirect('/accounts/view');

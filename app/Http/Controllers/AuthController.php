@@ -22,6 +22,10 @@ class AuthController extends Controller
             unset($user->password);
             unset($user->userType);
 
+            $taxiDriver = $user->taxiDriver;
+            $taxiDriver->oneSignalUserId = $request->oneSignalUserId;
+            $taxiDriver->save();
+
             $response['success'] = 0;
             $response['driver'] = $user;
         }

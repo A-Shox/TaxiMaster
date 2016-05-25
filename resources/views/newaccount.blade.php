@@ -90,7 +90,7 @@
                         </div>
 
                         <!-- Select Basic -->
-                        <div class="form-group">
+                        <div id="taxiIdDiv" class="form-group" style="display: none;">
                             <label class="col-md-4 control-label" for="taxiId">Taxi</label>
                             <div class="col-md-4">
                                 <select id="taxiId" name="taxiId" class="form-control">
@@ -182,12 +182,15 @@
 
             if(userType==1){
                 $('#licenceNoDiv').hide();
+                $('#taxiiddiv').hide();
             }
             else if(userType==2){
                 $('#licenceNoDiv').show();
+                $('#taxiiddiv').show();
             }
             else if(userType==3){
                 $('#licenceNoDiv').hide();
+                $('#taxiiddiv').hide();
             }
         });
 
