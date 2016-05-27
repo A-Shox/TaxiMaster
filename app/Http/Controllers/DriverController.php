@@ -41,7 +41,7 @@ class DriverController extends Controller
         $title = "Driver responded";
         $data = array('notificationType' => 'driverResponse', 'id' => $orderId);
 
-        if($isAccepted){
+        if($isAccepted === "true"){
             $newOrder->state = "ACCEPTED";
             $message = "Hire accepted.";
             $data['response'] = true;
