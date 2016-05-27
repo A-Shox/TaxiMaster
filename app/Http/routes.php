@@ -131,12 +131,14 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['api']], function () {
 
+    Route::get('/driver/orders', 'DriverController@getOrderList');
+    Route::post('/driver/login', 'AuthController@loginDriver');
     Route::post('/driver/update/state', 'DriverController@updateState');
     Route::post('/driver/update/location', 'DriverController@updateLocation');
-    Route::post('/driver/login', 'AuthController@loginDriver'); 
+    Route::get('/driver/order/respond', 'DriverController@respondToNewOrder');
 
     Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
-    Route::post('/customer/order/new', 'CustomerController@placeOrder');
+    Route::get('/customer/order/new', 'CustomerController@placeOrder');
 
 });
 

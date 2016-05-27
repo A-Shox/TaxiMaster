@@ -16,12 +16,11 @@ class CreateFinishedOrdersTable extends Migration
             $table->increments('id');
             $table->timestamp('startTime');
             $table->timestamp('endTime');
-            $table->text('startLocation');
-            $table->text('endLocation');
+            $table->text('origin');
+            $table->text('destination');
             $table->double('distance', 10, 3);
-            $table->string('customerPhone', 15);
+            $table->string('contact', 15);
             $table->integer('fare');
-            $table->string('orderType', 10);
         });
     }
 

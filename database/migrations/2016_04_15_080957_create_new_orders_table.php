@@ -14,13 +14,15 @@ class CreateNewOrdersTable extends Migration
     {
         Schema::create('new_orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('startLatitude', 8, 6);
-            $table->double('startLongitude', 9, 6);
-            $table->double('endLatitude', 8, 6);
-            $table->double('endLongitude', 9, 6);
+            $table->string('origin', 50);
+            $table->double('originLatitude', 8, 6);
+            $table->double('originLongitude', 9, 6);
+            $table->string('destination', 50);
+            $table->double('destinationLatitude', 8, 6);
+            $table->double('destinationLongitude', 9, 6);
             $table->timestamp('time');
-            $table->string('customerPhone', 15);
-            $table->string('orderType', 10);
+            $table->string('contact', 15);
+            $table->string('state', 10);
         });
     }
 
