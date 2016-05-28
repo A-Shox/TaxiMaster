@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\NewOrder;
 use App\FinishedOrder;
 use App\DriverUpdate;
+use App\TaxiDriver;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -72,6 +73,26 @@ class DriverController extends Controller
         }
         else if($type==1){
             return FinishedOrder::where('taxiDriverId', $driverId)->get();
+        }
+    }
+
+    public function finishOrder(Request $request){
+        $finishedOrder = new FinishedOrder;
+        $finishedOrder->startTime = $request->startTime;
+        $finishedOrder->endTime = $request->endTime;
+        $finishedOrder->origin = $request->origin;
+        $finishedOrder->destination = $request->destination;
+        $finishedOrder->distance = $request->distance;
+        $finishedOrder->contact = $request->contact;
+        $finishedOrder->fare = $request->fare;
+        $finishedOrder->taxiDriverId = $request->taxiDriverId;
+        $finishedOrder->taxiId = TaxiDriver::find($request->taxiDriverId)->taxi->id;
+        $result = $finishedOrder->save();
+
+        if ($result) {
+            return array('success' => true);
+        } else {
+            return array('success' => false);
         }
     }
 

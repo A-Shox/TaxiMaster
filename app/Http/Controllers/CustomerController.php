@@ -59,7 +59,7 @@ class CustomerController extends Controller
         $driverId = $request->driverId;
         $origin = $request->origin;
         $originLatitude = $request->originLatitude;
-        $originLongitude = $request->originLatitude;
+        $originLongitude = $request->originLongitude;
         $destination = $request->destination;
         $destinationLatitude = $request->destinationLatitude;
         $destinationLongitude = $request->destinationLongitude;
