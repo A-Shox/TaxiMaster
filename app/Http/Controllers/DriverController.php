@@ -15,11 +15,24 @@ class DriverController extends Controller
 {
     public function updateState(Request $request)
     {
+        $stateId = $request->stateId;
         $update = DriverUpdate::find($request->id);
-        $update->stateId = $request->stateId;
+        $update->stateId = $stateId;
         $update->updated_at = Carbon::now()->toDateTimeString();
         $update->save();
-        return array('success' => true);
+
+        if($stateId==3){
+            $orderId = $request->orderId;
+            $receiverId = NewOrder::find($orderId)->oneSignalUserId;
+            $response = OneSignalController::sendMessage("Hire update", "Driver started to come", array('notificationType' => 'now', 'id' => $orderId), $receiverId, 'CUSTOMER');
+        }
+
+        if (!isset($response['errors'])) {
+            return array('success' => true);
+        } else {
+            return array('success' => false);
+        }
+
     }
 
     public function updateLocation(Request $request)
