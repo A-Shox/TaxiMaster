@@ -16,98 +16,79 @@
 //Route::post('/test', 'TestController@doStuff');
 
 Route::group(['middleware' => ['web']], function () {
-    
-    Route::get("/test", function(){
+
+    Route::get("/test", function () {
         return View::make('test');
     });
 
-    Route::get('/', function()
-    {
-        if(Auth::check()){
+    Route::get('/', function () {
+        if (Auth::check()) {
             return redirect("/dashboard");
-        }
-        else{
+        } else {
             return View::make('login');
         }
     });
 
-    Route::get('/login', function()
-    {
-        if(Auth::check()){
+    Route::get('/login', function () {
+        if (Auth::check()) {
             return redirect("/dashboard");
-        }
-        else{
+        } else {
             return View::make('login');
         }
     });
 
-    Route::get('/dashboard', function()
-    {
-        if(Auth::check()){
+    Route::get('/dashboard', function () {
+        if (Auth::check()) {
             return View::make('dashboard');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
 
-    Route::get('/newhire', function()
-    {
-        if(Auth::check()){
+    Route::get('/newhire', function () {
+        if (Auth::check()) {
             return View::make('newhire');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
 
-
-    Route::get('/ongoingorders', function()
-    {
-        if(Auth::check()){
+    Route::get('/ongoingorders', function () {
+        if (Auth::check()) {
             return View::make('ongoing-orders');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
 
-    Route::get('/orderhistory', function()
-    {
-        if(Auth::check()){
+    Route::get('/orderhistory', function () {
+        if (Auth::check()) {
             return View::make('orderhistory');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
 
-    Route::get('/accounts/view', function()
-    {
-        if(Auth::check()){
+    Route::get('/accounts/view', function () {
+        if (Auth::check()) {
             return View::make('viewaccounts');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
 
-    Route::get('/taxis/new', function()
-    {
-        if(Auth::check()){
+    Route::get('/taxis/new', function () {
+        if (Auth::check()) {
             return View::make('newtaxi');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
 
-    Route::get('/taxis/edit/{taxi}', function()
-    {
-        if(Auth::check()){
+    Route::get('/taxis/edit/{taxi}', function () {
+        if (Auth::check()) {
             return View::make('edittaxi');
-        }
-        else{
+        } else {
             return redirect("/login");
         }
     });
@@ -127,6 +108,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/taxis/new', 'TaxiController@showNewTaxiPage');
     Route::post('/taxis/new', 'TaxiController@createNewTaxi');
+
+    Route::get('/ongoing-orders', 'OrderController@showOnGoingOrdersPage');
 });
 
 Route::group(['middleware' => ['api']], function () {
@@ -140,6 +123,7 @@ Route::group(['middleware' => ['api']], function () {
 
     Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');
     Route::get('/customer/order/new', 'CustomerController@placeOrder');
+    Route::get('/customer/get/driverUpdate', 'CustomerController@getDriverUpdate');
 
 });
 

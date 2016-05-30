@@ -108,4 +108,26 @@ class CustomerController extends Controller
             return array('success' => false);
         }
     }
+
+    public function getDriverUpdate(Request $request)
+    {
+        $driverUpdate = DriverUpdate::find($request->driverId);
+
+        $destinationLatitude = $request->latitude;
+        $destinationLongitude = $request->longitude;
+        $doriginLatitude = $driverUpdate->latitude;
+        $originLongitude = $driverUpdate->longitude;
+        $response = array();
+
+        $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&key=AIzaSyBc2y4jiBAtE3eNPVMOKkyJWA0TP5iy6hQ&origins=' . $doriginLatitude . ',' . $originLongitude . '&destinations=' . $destinationLatitude . ',' . $destinationLongitude;
+        $result = file_get_contents($url);
+        $json = json_decode($result, true);
+
+        $response['latitude'] = $driverUpdate->latitude;
+        $response['longitude'] = $driverUpdate->longitude;
+        $response['distance'] = $json['rows'][0]['elements'][0]['distance']['text'];
+        $response['time'] = $json['rows'][0]['elements'][0]['duration']['text'];
+        
+        return $response;
+    }
 }
