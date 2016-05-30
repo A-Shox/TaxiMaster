@@ -111,23 +111,24 @@ class CustomerController extends Controller
 
     public function getDriverUpdate(Request $request)
     {
+        $response = array('success' => false);
         $driverUpdate = DriverUpdate::find($request->driverId);
-
+        
         $destinationLatitude = $request->latitude;
         $destinationLongitude = $request->longitude;
-        $doriginLatitude = $driverUpdate->latitude;
+        $originLatitude = $driverUpdate->latitude;
         $originLongitude = $driverUpdate->longitude;
-        $response = array();
 
-        $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&key=AIzaSyBc2y4jiBAtE3eNPVMOKkyJWA0TP5iy6hQ&origins=' . $doriginLatitude . ',' . $originLongitude . '&destinations=' . $destinationLatitude . ',' . $destinationLongitude;
+        $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&key=AIzaSyBc2y4jiBAtE3eNPVMOKkyJWA0TP5iy6hQ&origins=' . $originLatitude . ',' . $originLongitude . '&destinations=' . $destinationLatitude . ',' . $destinationLongitude;
         $result = file_get_contents($url);
         $json = json_decode($result, true);
 
+        $response['success'] = true;
         $response['latitude'] = $driverUpdate->latitude;
         $response['longitude'] = $driverUpdate->longitude;
         $response['distance'] = $json['rows'][0]['elements'][0]['distance']['text'];
-        $response['time'] = $json['rows'][0]['elements'][0]['duration']['text'];
-        
+        $response['duration'] = $json['rows'][0]['elements'][0]['duration']['text'];
+
         return $response;
     }
 }

@@ -26,6 +26,9 @@ class DriverController extends Controller
             $receiverId = NewOrder::find($orderId)->oneSignalUserId;
             $response = OneSignalController::sendMessage("Hire update", "Driver started to come", array('notificationType' => 'now', 'id' => $orderId), $receiverId, 'CUSTOMER');
         }
+        else{
+            return array('success' => true);
+        }
 
         if (!isset($response['errors'])) {
             return array('success' => true);
