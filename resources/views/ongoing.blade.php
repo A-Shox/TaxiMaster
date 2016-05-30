@@ -33,7 +33,7 @@
                                 <td>{{$order->destinaton}}</td>
                                 <td>{{$order->contact}}</td>
                                 <td>{{$order->note}}</td>
-                                <td>{{$order->user->firstName . $order->user->lastName}}</td>
+                                <td>{{$order->user->firstName . ' ' . $order->user->lastName}}</td>
                             </tr>
                         @endforeach
                         </tbody>

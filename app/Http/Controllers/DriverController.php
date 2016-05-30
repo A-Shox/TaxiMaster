@@ -92,7 +92,7 @@ class DriverController extends Controller
         }
     }
 
-    public function finishOrder(Request $request){
+    public function finishOrder(Request $request){  
         $finishedOrder = new FinishedOrder;
         $finishedOrder->startTime = $request->startTime;
         $finishedOrder->endTime = $request->endTime;
