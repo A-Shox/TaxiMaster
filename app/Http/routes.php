@@ -110,6 +110,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/taxis/new', 'TaxiController@createNewTaxi');
 
     Route::get('/ongoing-orders', 'OrderController@showOnGoingOrdersPage');
+    Route::get('/ongoing-orders/get', 'OrderController@getOngoingOrders');
 });
 
 Route::group(['middleware' => ['api']], function () {

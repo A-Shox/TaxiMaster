@@ -90,7 +90,7 @@
     <!-- Driver state filter panel button clicks -->
     <script>
 
-        $(".filter-state-btn").click(function () {
+        $(".filter-orders-btn").click(function () {
             $(this).toggleClass("btn-success");
             if(this.value==0){
                 this.value=1;
