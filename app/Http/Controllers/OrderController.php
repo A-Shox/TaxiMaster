@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\NewOrder;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class OrderController extends Controller
 {
@@ -147,6 +148,7 @@ class OrderController extends Controller
             $orderList = array_merge($orderList, $rejectedList);
         }
 
+        $orderList = collect($orderList)->sortByDesc('time');
         return $orderList;
     }
 }
