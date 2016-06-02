@@ -5,6 +5,13 @@
     <link href="/css/jquery.datetimepicker.css" rel="stylesheet">
     <script src="/js/jquery.datetimepicker.full.min.js"></script>
 
+    <style>
+
+        html,body { height: 100%; }
+        #page-wrapper { height: 100% }
+
+    </style>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -86,11 +93,11 @@
                         <tbody id="tableBody">
                         @foreach($orderList as $order)
                             @if($order->taxiType==='nano')
-                                <tr class="success">
-                            @elseif($order->taxiType==='car')
-                                <tr class="info">
-                            @elseif($order->taxiType==='van')
                                 <tr class="warning">
+                            @elseif($order->taxiType==='car')
+                                <tr class="success">
+                            @elseif($order->taxiType==='van')
+                                <tr class="info">
                             @else
                                 <tr>
                                     @endif
@@ -140,7 +147,7 @@
     <script>
 
         function filterData(){
-            var nano = $("[name='now']").val();
+            var nano = $("[name='nano']").val();
             var car = $("[name='car']").val();
             var van = $("[name='van']").val();
             var from = $("[name='from']").val();
@@ -159,7 +166,7 @@
             }
             else {
                 window.location.href = url + "?nano=" + nano + "&car=" + car + "&van=" + van + "&from=" + from + "&to=" + to;
-            }
+                }
 
         }
 
@@ -176,24 +183,38 @@
         $(document).ready(function () {
             var nano = getParameterByName('nano');
             var car = getParameterByName('car');
-            var van = getParameterByName('van')
+            var van = getParameterByName('van');
             var from = getParameterByName('from');
             var to = getParameterByName('to');
 
             $('#datetimepickerFrom').val(from);
             $('#datetimepickerTo').val(to);
 
+            if(from==null){
+                $('#datetimepickerFrom').val('1 Week before');
+            }
+            else{
+                $('#datetimepickerFrom').val(from);
+            }
+
+            if(to==null){
+                $('#datetimepickerTo').val('Today');
+            }
+            else{
+                $('#datetimepickerTo').val(to);
+            }
+
             if(nano==0){
                 $('#nano').toggleClass('btn-warning');
-                $('#nano').val(now);
+                $('#nano').val(nano);
             }
-            if(pending==0){
+            if(car==0){
                 $('#car').toggleClass('btn-success');
-                $('#car').val(pending);
+                $('#car').val(car);
             }
-            if(accepted==0){
+            if(van==0){
                 $('#van').toggleClass('btn-info');
-                $('#van').val(accepted);
+                $('#van').val(van);
             }
 
         });

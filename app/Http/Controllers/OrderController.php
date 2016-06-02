@@ -25,6 +25,19 @@ class OrderController extends Controller
         }
     }
 
+    public function showFinishedOrdersPage(Request $request)
+    {
+
+        if (Auth::check()) {
+            $request['offset'] = 0;
+            $orderList = $this->getFinishedOrders($request);
+            return view('finishedorders', compact('orderList'));
+        } else {
+            return view('login');
+        }
+    }
+
+
     public function getOngoingOrders(Request $request)
     {
         if(isset($request->now)){
@@ -171,7 +184,7 @@ class OrderController extends Controller
             $van = $request->van;
         }
         else{
-            $cvan = 1;
+            $van = 1;
         }
         if(isset($request->from)){
             $from = $request->from;
@@ -193,81 +206,69 @@ class OrderController extends Controller
         $orderList = array();
 
         if ($nano == 1) {
-            $nanoList = FinishedOrder::with('taxi.taxiType', 'user')->where('taxiType', 'NOW')->where('time', '>', $from)->where('time', '<', $to)->limit(15)->offset(0)->with('user')->get();
+            $nanoList = FinishedOrder::with(['taxi'=>function($query){ $query->where('taxiTypeId', 1);}], 'user')->where('startTime', '>', $from)->where('startTime', '<', $to)->limit(15)->offset(0)->get();
 
-            foreach ($nowList as $order) {
-                $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
-                unset($order['originLatitude']);
-                unset($order['originLongitude']);
-                unset($order['destinationLatitude']);
-                unset($order['destinationLongitude']);
-                unset($order['taxiDriverId']);
-                unset($order['taxiOperatorUserId']);
-                unset($order['oneSignalUserId']);
-                unset($order['note']);
-                unset($order['user']);
+            for ($i=0; $i<count($nanoList); $i++) {
+                if($nanoList[$i]['taxi']!=null){
+                    $order = $nanoList[$i];
+                    $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
+                    $order['taxiType'] = 'nano';
+                    unset($order['endTime']);
+                    unset($order['contact']);
+                    unset($order['destinationLongitude']);
+                    unset($order['taxiDriverId']);
+                    unset($order['taxiId']);
+                    unset($order['taxiOperatorUserId']);
+                    unset($order['taxi']);
+                    unset($order['user']);
+
+                    array_push($orderList, $nanoList[$i]);
+                }
             }
-
-            $nowList = json_decode($nowList);
-            $orderList = array_merge($orderList, $nowList);
         }
 
-        if ($pending == 1) {
-            $pendingList = NewOrder::where('state', 'PENDING')->where('time', '>', $from)->where('time', '<', $to)->limit(15)->offset(0)->with('user')->get();
+        if ($car == 1) {
+            $carList = FinishedOrder::with(['taxi'=>function($query){ $query->where('taxiTypeId', 2);}], 'user')->where('startTime', '>', $from)->where('startTime', '<', $to)->limit(15)->offset(0)->get();
 
-            foreach ($pendingList as $order) {
-                $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
-                unset($order['originLatitude']);
-                unset($order['originLongitude']);
-                unset($order['destinationLatitude']);
-                unset($order['destinationLongitude']);
-                unset($order['taxiDriverId']);
-                unset($order['taxiOperatorUserId']);
-                unset($order['oneSignalUserId']);
-                unset($order['note']);
-                unset($order['user']);
+            for ($i=0; $i<count($carList); $i++) {
+                if($carList[$i]['taxi']!=null){
+                    $order = $carList[$i];
+                    $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
+                    $order['taxiType'] = 'car';
+                    unset($order['endTime']);
+                    unset($order['contact']);
+                    unset($order['destinationLongitude']);
+                    unset($order['taxiDriverId']);
+                    unset($order['taxiId']);
+                    unset($order['taxiOperatorUserId']);
+                    unset($order['taxi']);
+                    unset($order['user']);
+
+                    array_push($orderList, $carList[$i]);
+                }
             }
-
-            $pendingList = json_decode($pendingList);
-            $orderList = array_merge($orderList, $pendingList);
         }
-        if ($accepted == 1) {
-            $acceptedList = NewOrder::where('state', 'ACCEPTED')->where('time', '>', $from)->where('time', '<', $to)->limit(15)->offset(0)->with('user')->get();
 
-            foreach ($acceptedList as $order) {
-                $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
-                unset($order['originLatitude']);
-                unset($order['originLongitude']);
-                unset($order['destinationLatitude']);
-                unset($order['destinationLongitude']);
-                unset($order['taxiDriverId']);
-                unset($order['taxiOperatorUserId']);
-                unset($order['oneSignalUserId']);
-                unset($order['note']);
-                unset($order['user']);
+        if ($van == 1) {
+            $vanList = FinishedOrder::with(['taxi'=>function($query){ $query->where('taxiTypeId', 3);}], 'user')->where('startTime', '>', $from)->where('startTime', '<', $to)->limit(15)->offset(0)->get();
+
+            for ($i=0; $i<count($vanList); $i++) {
+                if($vanList[$i]['taxi']!=null){
+                    $order = $vanList[$i];
+                    $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
+                    $order['taxiType'] = 'van';
+                    unset($order['endTime']);
+                    unset($order['contact']);
+                    unset($order['destinationLongitude']);
+                    unset($order['taxiDriverId']);
+                    unset($order['taxiId']);
+                    unset($order['taxiOperatorUserId']);
+                    unset($order['taxi']);
+                    unset($order['user']);
+
+                    array_push($orderList, $vanList[$i]);
+                }
             }
-
-            $acceptedList = json_decode($acceptedList);
-            $orderList = array_merge($orderList, $acceptedList);
-        }
-        if ($rejected == 1) {
-            $rejectedList = NewOrder::where('state', 'REJECTED')->where('time', '>', $from)->where('time', '<', $to)->limit(15)->offset(0)->with('user')->get();
-
-            foreach ($rejectedList as $order) {
-                $order['driverName'] = $order['user']['firstName'] . ' ' . $order['user']['lastName'];
-                unset($order['originLatitude']);
-                unset($order['originLongitude']);
-                unset($order['destinationLatitude']);
-                unset($order['destinationLongitude']);
-                unset($order['taxiDriverId']);
-                unset($order['taxiOperatorUserId']);
-                unset($order['oneSignalUserId']);
-                unset($order['note']);
-                unset($order['user']);
-            }
-
-            $rejectedList = json_decode($rejectedList);
-            $orderList = array_merge($orderList, $rejectedList);
         }
 
         $orderList = collect($orderList)->sortByDesc('time');

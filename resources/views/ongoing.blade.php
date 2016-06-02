@@ -5,6 +5,13 @@
     <link href="/css/jquery.datetimepicker.css" rel="stylesheet">
     <script src="/js/jquery.datetimepicker.full.min.js"></script>
 
+    <style>
+
+        html,body { height: 100%; }
+        #page-wrapper { height: 100% }
+
+    </style>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">

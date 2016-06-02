@@ -93,7 +93,7 @@
                     <a href="/ongoing-orders"><i class="fa fa-fw fa-clock-o"></i> On Going Orders</a>
                 </li>
                 <li>
-                    <a href="/orderhistory"><i class="fa fa-fw fa-history"></i> Order History</a>
+                    <a href="/finished-orders"><i class="fa fa-fw fa-history"></i> Order History</a>
                 </li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-users"></i>
