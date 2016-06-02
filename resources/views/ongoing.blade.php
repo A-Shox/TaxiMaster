@@ -57,16 +57,16 @@
 
                 <script>
                     jQuery('#datetimepickerFrom').datetimepicker({
-                        todayButton:true,
-                        defaultDate:new Date(),
-                        onClose:function () {
+                        todayButton: true,
+                        defaultDate: new Date(),
+                        onClose: function () {
                             filterData();
                         }
                     });
                     jQuery('#datetimepickerTo').datetimepicker({
-                        todayButton:true,
-                        defaultDate:new Date(),
-                        onClose:function () {
+                        todayButton: true,
+                        defaultDate: new Date(),
+                        onClose: function () {
                             filterData();
                         }
                     });
@@ -110,9 +110,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-lg-6 col-lg-offset-3">
-                    <button class="btn btn-link" style="width:100%;" onclick="loadMore()">Load More</button>
-                </div>
+                {{--<div class="col-lg-6 col-lg-offset-3">--}}
+                    {{--<button class="btn btn-link" style="width:100%;" onclick="loadMore()">Load More</button>--}}
+                {{--</div>--}}
             </div>
         </div>
 
@@ -150,13 +150,14 @@
 
     <script>
 
-        function loadMore() {
-            $.get("/ongoing-orders/get?offset=" + ($("table tr").length - 1), function (data) {
-                $.each(data, function (key, value) {
-                    $('#tableBody').append("<tr><td>" + value['time'] + "</td><td>" + value['origin'] + "</td><td>" + value['destination'] + "</td><td>" + value['contact'] + "</td><td>" + value['driverName'] + "</td></tr>");
-                });
-            });
-        }
+        $('td').click(function(){
+           var row = $(this).parent().parent().children().index($(this).parent());
+
+        });
+
+    </script>
+
+    <script>
 
         function filterData() {
             var now = $("[name='now']").val();
@@ -168,13 +169,13 @@
 
             var url = "/ongoing-orders";
 
-            if(from.length==0 && to.length==0){
+            if (from.length == 0 && to.length == 0) {
                 window.location.href = url + "?now=" + now + "&pending=" + pending + "&accepted=" + accepted + "&rejected=" + rejected;
             }
-            else if(to.length==0){
+            else if (to.length == 0) {
                 window.location.href = url + "?now=" + now + "&pending=" + pending + "&accepted=" + accepted + "&rejected=" + rejected + "&from=" + from;
             }
-            else if(from.length==0){
+            else if (from.length == 0) {
                 window.location.href = url + "?now=" + now + "&pending=" + pending + "&accepted=" + accepted + "&rejected=" + rejected + "&to=" + to;
             }
             else {
@@ -201,22 +202,33 @@
             var from = getParameterByName('from');
             var to = getParameterByName('to');
 
-            $('#datetimepickerFrom').val(from);
-            $('#datetimepickerTo').val(to);
+            if(from==null){
+                $('#datetimepickerFrom').val('1 Week before');
+            }
+            else{
+                $('#datetimepickerFrom').val(from);
+            }
 
-            if(now==0){
+            if(to==null){
+                $('#datetimepickerTo').val('Today');
+            }
+            else{
+                $('#datetimepickerTo').val(to);
+            }
+
+            if (now == 0) {
                 $('#now').toggleClass('btn-success');
                 $('#now').val(now);
             }
-            if(pending==0){
+            if (pending == 0) {
                 $('#pending').toggleClass('btn-info');
                 $('#pending').val(pending);
             }
-            if(accepted==0){
+            if (accepted == 0) {
                 $('#accepted').toggleClass('btn-warning');
                 $('#accepted').val(accepted);
             }
-            if(rejected==0){
+            if (rejected == 0) {
                 $('#rejected').toggleClass('btn-danger');
                 $('#rejected').val(rejected);
             }

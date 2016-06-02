@@ -111,6 +111,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/ongoing-orders', 'OrderController@showOnGoingOrdersPage');
     Route::get('/ongoing-orders/get', 'OrderController@getOngoingOrders');
+    Route::get('/finished-orders', 'OrderController@showOnFinishedOrdersPage');
 });
 
 Route::group(['middleware' => ['api']], function () {
