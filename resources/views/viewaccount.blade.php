@@ -4,8 +4,8 @@
 
     <style>
 
-        html,body { height: 100%; }
-        #page-wrapper { height: 100% }
+        html,body { min-height: 100%; }
+        #page-wrapper { min-height: 100%; }
 
     </style>
 
