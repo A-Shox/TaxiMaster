@@ -97,7 +97,8 @@ class DriverController extends Controller
         }
     }
 
-    public function finishOrder(Request $request){  
+    public function finishOrder(Request $request){
+        $id = $request->id;
         $finishedOrder = new FinishedOrder;
         $finishedOrder->startTime = $request->startTime;
         $finishedOrder->endTime = $request->endTime;
@@ -110,11 +111,32 @@ class DriverController extends Controller
         $finishedOrder->taxiId = TaxiDriver::find($request->taxiDriverId)->taxi->id;
         $result = $finishedOrder->save();
 
-        if ($result) {
-            return array('success' => true);
-        } else {
+        if (!$result) {
             return array('success' => false);
         }
+
+        $newOrder = NewOrder::find($id);
+        $receiverId = $newOrder->oneSignalUserId;
+        $newOrder->delete();
+
+        if($receiverId!=null){
+            $title = "Hire finished";
+            $message = "Thank you";
+
+            $data = array('notificationType' => 'finishHire', 'id' => $id);
+
+            $response = OneSignalController::sendMessage($title, $message, $data, $receiverId, 'CUSTOMER');
+
+            if (!isset($response['errors'])) {
+                return array('success' => true);
+            } else {
+                return array('success' => false);
+            }
+        }
+        else{
+            return array('success' => true);
+        }
+
     }
 
 }
