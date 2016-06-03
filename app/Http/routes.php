@@ -12,14 +12,7 @@
 */
 
 
-//Route::get('/test', 'TestController@doStuff');
-//Route::post('/test', 'TestController@doStuff');
-
 Route::group(['middleware' => ['web']], function () {
-
-    Route::get("/test", function () {
-        return View::make('autocomplete');
-    });
 
     Route::get('/', function () {
         if (Auth::check()) {
