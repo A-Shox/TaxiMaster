@@ -77,33 +77,33 @@ class TaxiController extends Controller
         return view('edittaxi', compact('data'));
     }
 
-//    public function updateTaxi(Request $request){
-//
-//        $result = DB::transaction(function () use($request) {
-//            $driverId = $request->driverId;
-//            $taxiId = $request->taxiId;
-//
-//            $oldDriver = TaxiDriver::where('taxiId', $taxiId)->first();
-//            if($oldDriver!=null){
-//                $oldDriver->taxiId = null;
-//                $result =$oldDriver->save();
-//            }
-//
-//            if($driverId!=0){
-//                $newDriver = TaxiDriver::where('id', $driverId)->first();
-//                $newDriver->taxiId = $taxiId;
-//                $result = $newDriver->save();
-//            }
-//
-//            return $result;
-//        });
-//
-//        if($result){
-//            return redirect('/taxis/view');
-//        }
-//        else{
-//            $errors = new MessageBag(['msg' => 'Something went wrong!']);
-//            return back()->withErrors($errors);
-//        }
-//    }
+    public function updateTaxi(Request $request){
+
+        $result = DB::transaction(function () use($request) {
+            $driverId = $request->driverId;
+            $taxiId = $request->taxiId;
+
+            $oldDriver = TaxiDriver::where('taxiId', $taxiId)->first();
+            if($oldDriver!=null){
+                $oldDriver->taxiId = null;
+                $result =$oldDriver->save();
+            }
+
+            if($driverId!=0){
+                $newDriver = TaxiDriver::where('id', $driverId)->first();
+                $newDriver->taxiId = $taxiId;
+                $result = $newDriver->save();
+            }
+
+            return $result;
+        });
+
+        if($result){
+            return redirect('/taxis/view');
+        }
+        else{
+            $errors = new MessageBag(['msg' => 'Something went wrong!']);
+            return back()->withErrors($errors);
+        }
+    }
 }

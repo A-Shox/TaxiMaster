@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6637263-7b90-4cda-8f18-da1a7d46057a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/edittaxi.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/viewtaxis.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/TaxiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaxiController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Taxi.php" afterPath="$PROJECT_DIR$/app/Taxi.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/editaccount.blade.php" afterPath="$PROJECT_DIR$/resources/views/editaccount.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/newaccount.blade.php" afterPath="$PROJECT_DIR$/resources/views/newaccount.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/newtaxi.blade.php" afterPath="$PROJECT_DIR$/resources/views/newtaxi.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/viewaccount.blade.php" afterPath="$PROJECT_DIR$/resources/views/viewaccount.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/viewaccounts.blade.php" afterPath="$PROJECT_DIR$/resources/views/viewaccounts.blade.php" />
     </list>
     <ignored path="TaxiMaster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TaxiController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="107" column="7" selection-start-line="79" selection-start-column="5" selection-end-line="107" selection-end-column="7" />
+              <caret line="107" column="5" selection-start-line="79" selection-start-column="3" selection-end-line="107" selection-end-column="5" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
               </folding>
@@ -456,12 +443,12 @@
       <workItem from="1464737410682" duration="31372000" />
       <workItem from="1464851041673" duration="95000" />
       <workItem from="1464851536178" duration="15885000" />
-      <workItem from="1464911062504" duration="25133000" />
+      <workItem from="1464911062504" duration="25156000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="462290000" />
+    <option name="totallyTimeSpent" value="462313000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -907,7 +894,7 @@
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TaxiController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="107" column="7" selection-start-line="79" selection-start-column="5" selection-end-line="107" selection-end-column="7" />
+          <caret line="107" column="5" selection-start-line="79" selection-start-column="3" selection-end-line="107" selection-end-column="5" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
