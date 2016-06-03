@@ -87,7 +87,7 @@
                     <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="/newhire "><i class="fa fa-fw fa-plus"></i> New Hire</a>
+                    <a href="/neworder"><i class="fa fa-fw fa-plus"></i> New Hire</a>
                 </li>
                 <li>
                     <a href="/ongoing-orders"><i class="fa fa-fw fa-clock-o"></i> On Going Orders</a>

@@ -23,6 +23,8 @@ class CreateNewOrdersTable extends Migration
             $table->timestamp('time');
             $table->string('contact', 15);
             $table->string('state', 10);
+            $table->string('oneSignalUserId', 50)->nullable();
+            $table->text('note');
         });
     }
 

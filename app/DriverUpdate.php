@@ -11,4 +11,8 @@ class DriverUpdate extends Model
     public function taxiDriver(){
         return $this->belongsTo(TaxiDriver::class, 'id', 'id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id', 'id');
+    }
 }

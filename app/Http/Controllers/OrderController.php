@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\FinishedOrder;
+use App\TaxiDriver;
+use App\DriverUpdate;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -274,5 +276,21 @@ class OrderController extends Controller
         $orderList = collect($orderList)->sortByDesc('time');
         return $orderList;
     }
+
+    public function showNewOrderPage(){
+        $data = array('status'=>null);
+        $idNameList = array();
+        $driverList = DriverUpdate::with('user')->where('stateId', 2)->get();
+        foreach ($driverList as $driver){
+            array_push($idNameList, array('id'=>$driver->id, 'name'=>$driver->user->fullName()));
+        }
+        $data['idNameList'] = $idNameList;
+        return view('neworder', compact('data'));
+    }
+    
+    public function getOrderState(Request $request){
+        return NewOrder::where('id', $request->id)->first(['state']);
+    }
+    
 }
 

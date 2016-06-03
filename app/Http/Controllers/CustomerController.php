@@ -8,6 +8,7 @@ use App\TaxiDriver;
 use App\NewOrder;
 use App\Http\Requests;
 use App\Http\Controllers\OneSignalController;
+use Illuminate\Support\MessageBag;
 
 class CustomerController extends Controller
 {
@@ -66,6 +67,12 @@ class CustomerController extends Controller
         $time = $request->time;
         $note = $request->note;
         $contact = $request->contact;
+        if(isset($request['oneSignalUserId'])){
+            $oneSignalUserId = $request->oneSignalUserId;
+        }
+        else{
+            $oneSignalUserId = null;
+        }
 
         $newOrder = new NewOrder;
         $newOrder->origin = $origin;
@@ -79,7 +86,7 @@ class CustomerController extends Controller
         $newOrder->contact = $contact;
         $newOrder->taxiDriverId = $driverId;
         $newOrder->state = "PENDING";
-        $newOrder->oneSignalUserId = $request->oneSignalUserId;
+        $newOrder->oneSignalUserId = $oneSignalUserId;
         $newOrder->save();
 
         $title = "New Hire Received";
@@ -130,5 +137,18 @@ class CustomerController extends Controller
         $response['duration'] = $json['rows'][0]['elements'][0]['duration']['text'];
 
         return $response;
+    }
+    
+    public function placeOrderByTaxiOperator(Request $request){
+        $result = $this->placeOrder($request);
+        if($result['success']){
+            $data = array('id'=>$result['id'], 'status'=>'PENDING');
+            return $data;
+        }
+        else{
+            $errors = new MessageBag(['msg' => 'Something went wrong']);
+            $data = array('id'=>'error');
+            return back()->withErrors($errors);
+        }
     }
 }

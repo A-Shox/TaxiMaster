@@ -18,7 +18,7 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::get("/test", function () {
-        return View::make('test');
+        return View::make('autocomplete');
     });
 
     Route::get('/', function () {
@@ -93,11 +93,14 @@ Route::group(['middleware' => ['web']], function () {
         }
     });
 
-
     Route::post('/login', 'AuthController@loginWeb');
     Route::get('/logout', 'AuthController@logoutWeb');
 
     Route::get('/updates', 'WebController@getDriverUpdates');
+
+    Route::get('/neworder', 'OrderController@showNewOrderPage');
+    Route::get('/taxioperator/order/new', 'CustomerController@placeOrderByTaxiOperator');
+    Route::get('/taxioperator/order/state', 'OrderController@getOrderState');
 
     Route::get('/accounts/delete/{id}', 'UserController@deleteUser');
     Route::get('/accounts/view/{user}', 'UserController@showViewPage');
@@ -123,7 +126,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('/driver/login', 'AuthController@loginDriver');
     Route::post('/driver/update/state', 'DriverController@updateState');
     Route::post('/driver/update/location', 'DriverController@updateLocation');
-    Route::post('/driver/order/respond', 'DriverController@respondToNewOrder');
+    Route::get('/driver/order/respond', 'DriverController@respondToNewOrder');
     Route::get('/driver/order/finish', 'DriverController@finishOrder');
 
     Route::get('/customer/taxis', 'CustomerController@getAvailableTaxis');

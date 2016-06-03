@@ -55,9 +55,6 @@ class DriverController extends Controller
         $newOrder = NewOrder::find($orderId);
         $receiverId = $newOrder->oneSignalUserId;
 
-        $title = "Driver responded";
-        $data = array('notificationType' => 'driverResponse', 'id' => $orderId);
-
         if($isAccepted === "true"){
             $newOrder->state = "ACCEPTED";
             $message = "Hire accepted.";
@@ -70,12 +67,20 @@ class DriverController extends Controller
         }
         $newOrder->save();
 
-        $response = OneSignalController::sendMessage($title, $message, $data, $receiverId, 'CUSTOMER');
+        if($receiverId!=null){
+            $title = "Driver responded";
+            $data = array('notificationType' => 'driverResponse', 'id' => $orderId);
 
-        if (!isset($response['errors'])) {
+            $response = OneSignalController::sendMessage($title, $message, $data, $receiverId, 'CUSTOMER');
+
+            if (!isset($response['errors'])) {
+                return array('success' => true);
+            } else {
+                return array('success' => false);
+            }
+        }
+        else{
             return array('success' => true);
-        } else {
-            return array('success' => false);
         }
 
     }
