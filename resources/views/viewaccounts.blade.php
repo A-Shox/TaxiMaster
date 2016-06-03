@@ -13,13 +13,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Accounts
+                    All Accounts
                 </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-fw fa-users"></i> View accounts
-                    </li>
-                </ol>
             </div>
         </div>
 

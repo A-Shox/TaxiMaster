@@ -35,29 +35,6 @@ class AuthController extends Controller
         return $response;
     }
 
-    /*
-    public function loginDriver(Request $request)
-    {
-        $response = array();
-        $user = User::where('username', [$request->username, 'userType' => 'DRIVER'])->first();
-        if ($user != null) {
-            if(Hash::check($request->password, $user->password)){
-                $response['success'] = 0;
-
-                unset($user->password);
-                unset($user->userType);
-                $response['driver'] = $user;
-            }
-            else{
-                $response['success'] = 1;
-            }
-        } else {
-            $response['success'] = 2;
-        }
-        return $response;
-    }
-    */
-
     /**
      * @param Request $request
      * @return success = [0 - success, 1 - incorrect password, 2 - username not exists, -1  = error]

@@ -18,13 +18,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Accounts
+                    New Accounts
                 </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-fw fa-user"></i> Create new user account
-                    </li>
-                </ol>
             </div>
         </div>
 
@@ -189,15 +184,15 @@
 
             if(userType==1){
                 $('#licenceNoDiv').hide();
-                $('#taxiiddiv').hide();
+                $('#taxiIdDiv').hide();
             }
             else if(userType==2){
                 $('#licenceNoDiv').show();
-                $('#taxiiddiv').show();
+                $('#taxiIdDiv').show();
             }
             else if(userType==3){
                 $('#licenceNoDiv').hide();
-                $('#taxiiddiv').hide();
+                $('#taxiIdDiv').hide();
             }
         });
 

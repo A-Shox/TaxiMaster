@@ -106,7 +106,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/accounts/new', 'UserController@showNewUserPage');
     Route::post('/accounts/new', 'UserController@createNewUser');
 
-    Route::get('/taxis/new', 'TaxiController@showNewTaxiPage');
+    Route::get('/taxis/view', 'TaxiController@showViewTaxisPage');
+    Route::get('/taxis/edit/{taxi}', 'TaxiController@showEditTaxisPage');
+    Route::post('/taxis/update/{taxi}', 'TaxiController@updateTaxi');
     Route::post('/taxis/new', 'TaxiController@createNewTaxi');
 
     Route::get('/ongoing-orders', 'OrderController@showOnGoingOrdersPage');

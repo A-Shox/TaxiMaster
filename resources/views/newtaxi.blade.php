@@ -14,13 +14,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Taxis
+                    New Taxis
                 </h1>
-                <ol class="breadcrumb">
-                    <li class="active">
-                        <i class="fa fa-fw fa-plus"></i> Add a new taxi
-                    </li>
-                </ol>
             </div>
         </div>
 

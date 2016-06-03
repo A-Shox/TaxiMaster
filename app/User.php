@@ -15,4 +15,8 @@ class User extends Authenticatable
     public function newOrder(){
         return $this->hasMany(TaxiDriver::class, 'id', 'taxiDriverId');
     }
+
+    public function fullName(){
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }
