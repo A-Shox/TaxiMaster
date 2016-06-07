@@ -54,9 +54,9 @@
                     <div class="panel-heading text-center"><strong>TAXI TYPE</strong></div>
 
                     <div class="panel-body">
-                        <button type="button" class="btn btn-info filter-type-btn" value="1" name="nano">NANO</button>
-                        <button type="button" class="btn btn-info filter-type-btn" value="1" name="car">CAR</button>
-                        <button type="button" class="btn btn-info filter-type-btn" value="1" name="van">VAN</button>
+                        <button id="nano" type="button" class="btn btn-danger filter-type-btn" value="1" name="nano">NANO</button>
+                        <button id="car" type="button" class="btn btn-success filter-type-btn" value="1" name="car">CAR</button>
+                        <button id="van" type="button" class="btn btn-info filter-type-btn" value="1" name="van">VAN</button>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
     <!-- Driver state filter panel button clicks -->
     <script>
 
-        $(".filter-orders-btn").click(function () {
+        $(".filter-state-btn").click(function () {
             $(this).toggleClass("btn-success");
             if(this.value==0){
                 this.value=1;
@@ -107,7 +107,16 @@
     <script>
 
         $(".filter-type-btn").click(function () {
-            $(this).toggleClass("btn-info");
+            if (this.id === 'nano') {
+                $('#nano').toggleClass('btn-danger');
+            }
+            else if (this.id === 'car') {
+                $('#car').toggleClass('btn-success');
+            }
+            else if (this.id === 'van') {
+                $('#van').toggleClass('btn-info');
+            }
+
             if(this.value==0){
                 this.value=1;
             }
@@ -161,10 +170,57 @@
 
             $.each(updates, function (key, updateSet) {
                 $.each(updateSet, function (key, update) {
-                    if((update.taxi_type === "Nano" && nano==1) || (update.taxi_type === "Car" && car==1) || (update.taxi_type === "Van" && van==1)){
+                    if(update.taxi_type === "Nano" && nano==1){
+
+                        var image = {
+                            url: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                        };
+
                         marker = new google.maps.Marker({
                             position: new google.maps.LatLng(update.latitude, update.longitude),
-                            map: map
+                            map: map,
+                            icon: image,
+                        });
+
+                        markers.push(marker);
+
+                        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                infowindow.setContent("<strong>" + update.name + "</strong>" + "<br>" + update.taxi_model);
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
+//                        alert(update.name);
+                    }
+                    if(update.taxi_type === "Car" && car==1){
+                        var image = {
+                            url: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                        }
+
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(update.latitude, update.longitude),
+                            map: map,
+                            icon: image
+                        });
+
+                        markers.push(marker);
+
+                        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                            return function() {
+                                infowindow.setContent("<strong>" + update.name + "</strong>" + "<br>" + update.taxi_model);
+                                infowindow.open(map, marker);
+                            }
+                        })(marker, i));
+                    }
+                    if(update.taxi_type === "Van" && van==1){
+                        var image = {
+                            url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                        }
+
+                        marker = new google.maps.Marker({
+                            position: new google.maps.LatLng(update.latitude, update.longitude),
+                            map: map,
+                            icon: image
                         });
 
                         markers.push(marker);
