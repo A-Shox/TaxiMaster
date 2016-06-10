@@ -61,7 +61,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Taxi Master</a>
+            <a class="navbar-brand" href="index.html">Taxi Master - {{\Illuminate\Support\Facades\Auth::user()->userLevel->name}}</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -83,40 +83,55 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="/neworder"><i class="fa fa-fw fa-plus"></i> New Hire</a>
-                </li>
-                <li>
-                    <a href="/ongoing-orders"><i class="fa fa-fw fa-clock-o"></i> On Going Orders</a>
-                </li>
-                <li>
-                    <a href="/finished-orders"><i class="fa fa-fw fa-history"></i> Order History</a>
-                </li>
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-users"></i>
-                        Accounts <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="demo" class="collapse">
-                        <li>
-                            <a href="/accounts/new"><i class="fa fa-fw fa-user"></i> New Account</a>
-                        </li>
-                        <li>
-                            <a href="/accounts/view"><i class="fa fa-fw fa-list"></i> View Accounts</a>
-                        </li>
-                    </ul>
-                </li>
+                @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 1)->get()))
+                    <li class="active">
+                        <a href="/dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                @endif
+                @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 2)->get()))
+                    <li>
+                        <a href="/neworder"><i class="fa fa-fw fa-plus"></i> New Hire</a>
+                    </li>
+                @endif
+                @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 3)->get()))
+                    <li>
+                        <a href="/ongoing-orders"><i class="fa fa-fw fa-clock-o"></i> On Going Orders</a>
+                    </li>
+                @endif
+                @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 4)->get()))
+                    <li>
+                        <a href="/finished-orders"><i class="fa fa-fw fa-history"></i> Order History</a>
+                    </li>
+                @endif
+                @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 5)->get()))
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i
+                                    class="fa fa-fw fa-users"></i>
+                            Accounts <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="/accounts/new"><i class="fa fa-fw fa-user"></i> New Account</a>
+                            </li>
+                            <li>
+                                <a href="/accounts/view"><i class="fa fa-fw fa-list"></i> View Accounts</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-taxi"></i>
                         Taxis <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo1" class="collapse">
-                        <li>
-                            <a href="/taxis/new"><i class="fa fa-fw fa-plus"></i> New Taxi</a>
-                        </li>
-                        <li>
-                            <a href="/taxis/view"><i class="fa fa-fw fa-pencil-square-o"></i> View Taxis</a>
-                        </li>
+                        @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 7)->get()))
+                            <li>
+                                <a href="/taxis/new"><i class="fa fa-fw fa-plus"></i> New Taxi</a>
+                            </li>
+                        @endif
+                        @if(count(\App\UserLevelPrivilege::where('user_level_id', \Illuminate\Support\Facades\Auth::user()->userLevel->id)->where('privilege_id', 8)->get()))
+                            <li>
+                                <a href="/taxis/view"><i class="fa fa-fw fa-pencil-square-o"></i> View Taxis</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
             </ul>

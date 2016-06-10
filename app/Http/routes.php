@@ -70,14 +70,6 @@ Route::group(['middleware' => ['web']], function () {
         }
     });
 
-    Route::get('/taxis/new', function () {
-        if (Auth::check()) {
-            return View::make('newtaxi');
-        } else {
-            return redirect("/login");
-        }
-    });
-
     Route::get('/taxis/edit/{taxi}', function () {
         if (Auth::check()) {
             return View::make('edittaxi');
@@ -102,6 +94,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/accounts/new', 'UserController@showNewUserPage');
     Route::post('/accounts/new', 'UserController@createNewUser');
 
+    Route::get('/taxis/new', 'TaxiController@showNewTaxiPage');
     Route::get('/taxis/view', 'TaxiController@showViewTaxisPage');
     Route::get('/taxis/edit/{taxi}', 'TaxiController@showEditTaxisPage');
     Route::post('/taxis/update/{taxi}', 'TaxiController@updateTaxi');

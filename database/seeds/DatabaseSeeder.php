@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(StatesTableSeeder::class);
         $this->call(TaxiTypesTableSeeder::class);
+//        $this->call(UserLevelSeeder::class);
+//        $this->call(PrivilegesSeeder::class);
         $this->call(TaxisTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(TaxiDriverTableSeeder::class);

@@ -19,4 +19,8 @@ class User extends Authenticatable
     public function fullName(){
         return $this->firstName . ' ' . $this->lastName;
     }
+    
+    public function userLevel(){
+        return $this->belongsTo(UserLevel::class, 'userLevelId', 'id');
+    }
 }

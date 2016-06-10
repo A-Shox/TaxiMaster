@@ -56,16 +56,7 @@ class UserController extends Controller
         }
 
         $user = new User;
-        if($request->userType == 1){
-            $user->userType = 'ADMIN';
-        }
-        else if($request->userType == 2){
-            $user->userType = 'DRIVER';
-        }
-        else if($request->userType == 3){
-            $user->userType = 'TAXI_OPERATOR';
-        }
-
+        $user->userLevelId = $request->userType;
         $user->username = $request->username;
         $user->firstName = $request->firstName;
         $user->lastName = $request->lastName;

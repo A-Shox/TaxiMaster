@@ -17,7 +17,7 @@ class AuthController extends Controller
     public function loginDriver(Request $request){
         $response = array();
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userType' => 'DRIVER'])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userLevelId' => 2])) {
             $user = Auth::user();
             unset($user->password);
             unset($user->userType);
@@ -41,7 +41,7 @@ class AuthController extends Controller
      */
     public function loginWeb(Request $request)
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userType' => 'ADMIN']) || Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userType' => 'TAXI_OPERATOR'])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userLevelId' => 1]) || Auth::attempt(['username' => $request->username, 'password' => $request->password, 'userLevelId' => 3])) {
             return redirect()->intended('dashboard');
         }
         else{
