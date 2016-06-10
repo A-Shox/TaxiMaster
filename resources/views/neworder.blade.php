@@ -33,7 +33,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <form id="new_account_form" class="form-horizontal" method="get">
+                <form id="new_order_form" class="form-horizontal" method="get">
                     <fieldset>
                         {{csrf_field()}}
 
@@ -135,6 +135,8 @@
                         todayButton: true,
                         defaultDate: new Date(),
                         format: 'Y-m-d H:i',
+                        minDate:0,
+                        minTime:0,
                     });
 
                 </script>
@@ -146,42 +148,44 @@
 
     <!-- On submit handler -->
     <script>
+        $('#new_order_form').validate();
 
         $('#submit').click(function () {
+            if($('#new_order_form').valid()){
+                var origin = $("[name='origin']").val();
+                var destination = $("[name='destination']").val();
+                var originLatitude = $("[name='originLatitude']").val();
+                var originLongitude = $("[name='originLongitude']").val();
+                var destinationLatitude = $("[name='destinationLatitude']").val();
+                var destinationLongitude = $("[name='destinationLongitude']").val();
+                var time = $("[name='time']").val();
+                var note = $("[name='note']").val();
+                var contact = $("[name='contact']").val();
+                var driverId = $("[name='driverId']").val();
 
-            var origin = $("[name='origin']").val();
-            var destination = $("[name='destination']").val();
-            var originLatitude = $("[name='originLatitude']").val();
-            var originLongitude = $("[name='originLongitude']").val();
-            var destinationLatitude = $("[name='destinationLatitude']").val();
-            var destinationLongitude = $("[name='destinationLongitude']").val();
-            var time = $("[name='time']").val();
-            var note = $("[name='note']").val();
-            var contact = $("[name='contact']").val();
-            var driverId = $("[name='driverId']").val();
+                var url = "/taxioperator/order/new?&originLatitude=" + originLatitude + "&originLongitude=" + originLongitude + "&destinationLatitude=" + destinationLatitude + "&destinationLongitude=" + destinationLongitude + "&driverId=" + driverId + "&origin=" + origin + "&destination=" + destination + "&time=" + time + "&contact=" + contact + "&note=" + note;
 
-            var url = "/taxioperator/order/new?&originLatitude=" + originLatitude + "&originLongitude=" + originLongitude + "&destinationLatitude=" + destinationLatitude + "&destinationLongitude=" + destinationLongitude + "&driverId=" + driverId + "&origin=" + origin + "&destination=" + destination + "&time=" + time + "&contact=" + contact + "&note=" + note;
+                $.get(url, function (data) {
+                    $('#stateImage').show();
+                    var refreshUrl = "http://localhost:8000/taxioperator/order/state?id=" + data['id'];
 
-            $.get(url, function (data) {
-                $('#stateImage').show();
-                var refreshUrl = "http://localhost:8000/taxioperator/order/state?id=" + data['id'];
-
-                var interval = setInterval(function () {
-                    $.get(refreshUrl, function (data) {
-                        if(data['state']=="ACCEPTED"){
-                            $('#stateImage').attr("src","/img/right.png");
-                            setTimeout(function () {
-                                window.location.href = "/ongoing-orders";
-                            }, 1000);
-                            clearInterval(interval);
-                        }
-                        else if(data['state']=="REJECTED"){
-                            $('#stateImage').attr("src","/img/false.png");
-                            clearInterval(interval);
-                        }
-                    })
-                }, 1000);
-            });
+                    var interval = setInterval(function () {
+                        $.get(refreshUrl, function (data) {
+                            if(data['state']=="ACCEPTED"){
+                                $('#stateImage').attr("src","/img/right.png");
+                                setTimeout(function () {
+                                    window.location.href = "/ongoing-orders";
+                                }, 1000);
+                                clearInterval(interval);
+                            }
+                            else if(data['state']=="REJECTED"){
+                                $('#stateImage').attr("src","/img/false.png");
+                                clearInterval(interval);
+                            }
+                        })
+                    }, 1000);
+                });
+            }
         });
 
 
