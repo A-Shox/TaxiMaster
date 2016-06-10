@@ -2,6 +2,11 @@
 
 @section('content')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js   "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
+
     <style>
 
         html, body {
@@ -25,7 +30,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <form class="form-horizontal" action="/accounts/update/{{$user->username}}" method="POST">
+                <form id="edit_account_form" class="form-horizontal" action="/accounts/update/{{$user->username}}" method="POST">
                     <fieldset>
                         {{csrf_field()}}
 
@@ -84,6 +89,8 @@
     </div>
 
     <script>
+
+        $('#edit_account_form').validate();
 
         back = function () {
             parent.history.back();

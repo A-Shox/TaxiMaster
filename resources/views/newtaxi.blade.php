@@ -2,6 +2,11 @@
 
 @section('content')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js   "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/additional-methods.min.js"></script>
+
     <style>
 
         html,body { min-height: 100%; }
@@ -21,7 +26,7 @@
 
         <div class="row">
             <div class="col-lg-12">
-                <form class="form-horizontal" action="/taxis/new" method="post">
+                <form id="new_taxi_form" class="form-horizontal" action="/taxis/new" method="post">
                     <fieldset>
                         {{csrf_field()}}
                         <!-- Select Basic -->
@@ -90,4 +95,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        $('#new_taxi_form').validate();
+
+    </script>
 @stop
