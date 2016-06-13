@@ -11,6 +11,7 @@ class StatesTableSeeder extends Seeder
      */
     public function run()
     {
+        (new \App\State(['name'=>'NOT_IN_SERVICE']))->save();
         (new \App\State(['name'=>'AVAILABLE']))->save();
         (new \App\State(['name'=>'GOING_FOR_HIRE']))->save();
         (new \App\State(['name'=>'IN_HIRE']))->save();

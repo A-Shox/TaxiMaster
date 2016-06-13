@@ -54,7 +54,6 @@ class UserController extends Controller
 
     public function createNewUser(Request $request)
     {
-
         if (count(User::where('username', $request->username)->get()) > 0) {
             $errors = new MessageBag(['msg' => 'Username already exists!']);
             return back()->withErrors($errors)->withInput();
