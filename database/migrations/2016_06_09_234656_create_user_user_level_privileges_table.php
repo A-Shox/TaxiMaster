@@ -15,6 +15,7 @@ class CreateUserUserLevelPrivilegesTable extends Migration
         Schema::create('user_level_privileges', function (Blueprint $table) {
             $table->integer('user_level_id');
             $table->integer('privilege_id');
+            $table->primary(array('user_level_id', 'privilege_id'));
         });
     }
 
