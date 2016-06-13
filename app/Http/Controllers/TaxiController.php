@@ -82,6 +82,7 @@ class TaxiController extends Controller
         $result = DB::transaction(function () use($request) {
             $driverId = $request->driverId;
             $taxiId = $request->taxiId;
+            $result = false;
 
             $oldDriver = TaxiDriver::where('taxiId', $taxiId)->first();
             if($oldDriver!=null){
