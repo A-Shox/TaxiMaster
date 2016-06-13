@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('lastName', 45);
             $table->string('phone', 15)->unique();
             $table->integer('userLevelId')->unsigned();
-            $table->boolean('isActive');
+            $table->boolean('isActive')->default(1);
 
             $table->unique(array('firstName', 'lastName'));
         });

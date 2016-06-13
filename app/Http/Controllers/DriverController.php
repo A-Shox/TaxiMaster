@@ -25,6 +25,10 @@ class DriverController extends Controller
             $orderId = $request->orderId;
             $receiverId = NewOrder::find($orderId)->oneSignalUserId;
             $response = OneSignalController::sendMessage("Hire update", "Driver started to come", array('notificationType' => 'now', 'id' => $orderId), $receiverId, 'CUSTOMER');
+
+            $newOrder = NewOrder::find($orderId);
+            $newOrder->state = "NOW";
+            $newOrder->save();
         }
         else{
             return array('success' => true);
@@ -69,7 +73,8 @@ class DriverController extends Controller
 
         if($receiverId!=null){
             $title = "Driver responded";
-            $data = array('notificationType' => 'driverResponse', 'id' => $orderId);
+            $data['notificationType'] = 'driverResponse';
+            $data['id'] = $orderId;
 
             $response = OneSignalController::sendMessage($title, $message, $data, $receiverId, 'CUSTOMER');
 
@@ -90,7 +95,7 @@ class DriverController extends Controller
         $type = $request->type;
 
         if($type==0){
-            return NewOrder::where('taxiDriverId', $driverId)->get();
+            return NewOrder::where('taxiDriverId', $driverId)->where('state', '!=', 'REJECTED')->get();
         }
         else if($type==1){
             return FinishedOrder::where('taxiDriverId', $driverId)->get();

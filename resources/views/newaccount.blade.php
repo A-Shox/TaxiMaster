@@ -34,9 +34,9 @@
                             <div class="col-md-4">
                                 <select id="userType" name="userType" class="form-control" required>
                                     <option value="">-- Select one --</option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Taxi Driver</option>
-                                    <option value="3">Taxi Operator</option>
+                                    <option value="1" @if (old("userType") == "1") selected="selected" @endif>Admin</option>
+                                    <option value="2" @if (old("userType") == "2") selected="selected" @endif>Taxi Driver</option>
+                                    <option value="3" @if (old("userType") == "3") selected="selected" @endif>Taxi Operator</option>
                                 </select>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             <label class="col-md-4 control-label" for="username">Username</label>
                             <div class="col-md-4">
                                 <input id="username" name="username" type="text" placeholder="Username"
-                                       class="form-control input-md" required>
+                                       class="form-control input-md" required value="{{old('username')}}">
 
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                             <label class="col-md-4 control-label" for="firstname">First name</label>
                             <div class="col-md-4">
                                 <input id="firstname" name="firstName" type="text" placeholder="First name"
-                                       class="form-control input-md" required>
+                                       class="form-control input-md" required value="{{old('firstName')}}">
 
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <label class="col-md-4 control-label" for="lastname">Last name</label>
                             <div class="col-md-4">
                                 <input id="lastname" name="lastName" type="text" placeholder="Last name"
-                                       class="form-control input-md" required>
+                                       class="form-control input-md" required value="{{old('lastName')}}">
 
                             </div>
                         </div>
@@ -75,8 +75,8 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="phone">Mobile phone</label>
                             <div class="col-md-4">
-                                <input id="phone" name="phone" type="text" placeholder="Enter a mobile phone number"
-                                       class="form-control input-md" required>
+                                <input id="phone" name="phone" type="tel" placeholder="Enter a mobile phone number"
+                                       class="form-control input-md" required value="{{old('phone')}}">
 
                             </div>
                         </div>
@@ -85,8 +85,8 @@
                         <div id="licenceNoDiv" class="form-group" style="display: none;">
                             <label class="col-md-4 control-label" for="licenceNo">Licence Number</label>
                             <div class="col-md-4">
-                                <input id="licenceNo" name="licenceNo" type="text" placeholder="Enter lience number of new driver"
-                                       class="form-control input-md" required>
+                                <input id="licenceNo" name="licenceNo" type="text" placeholder="Enter licence number of new driver"
+                                       class="form-control input-md" required value="{{old('licenceNo')}}">
 
                             </div>
                         </div>
@@ -177,7 +177,14 @@
             }
         });
 
-        $('#new_account_form').validate();
+        $('#new_account_form').validate({
+            rules:{
+                firstName: { lettersonly: true },
+                lastName: { lettersonly: true },
+                phone: { numbersonly: true }
+            }
+        })
+        ;
 
         $('#userType').on('change', function () {
             userType = $('#userType').val();

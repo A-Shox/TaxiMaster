@@ -47,9 +47,21 @@ class CustomerController extends Controller
         $result = file_get_contents($url);
         $json = json_decode($result, true);
 
+        $itemsToDelete = array();
+
         for ($i = 0; $i < count($response); $i++) {
-            $response[$i]['distance'] = $json['rows'][$i]['elements'][0]['distance']['text'];
-            $response[$i]['duration'] = $json['rows'][$i]['elements'][0]['duration']['text'];
+            if($json['rows'][$i]['elements'][0]['status'] === "OK"){
+                $response[$i]['distance'] = $json['rows'][$i]['elements'][0]['distance']['text'];
+                $response[$i]['duration'] = $json['rows'][$i]['elements'][0]['duration']['text'];
+                $response[$i]['durationValue'] = $json['rows'][$i]['elements'][0]['duration']['value'];
+            }
+            else{
+                array_push($itemsToDelete, $i);
+            }
+        }
+
+        for($i=count($itemsToDelete)-1;$i>-1;$i--){
+            array_splice($response, $itemsToDelete[$i], 1);
         }
 
         return $response;
@@ -98,7 +110,7 @@ class CustomerController extends Controller
             'originLatitude' => $originLatitude,
             'originLongitude' => $originLongitude,
             'destination' => $destination,
-            'destinationLatitude' => $destinationLongitude,
+            'destinationLatitude' => $destinationLatitude,
             'destinationLongitude' => $destinationLongitude,
             'time' => $time,
             'note' => $note,

@@ -20,7 +20,7 @@ class CreateNewOrdersTable extends Migration
             $table->string('destination', 50);
             $table->double('destinationLatitude', 8, 6);
             $table->double('destinationLongitude', 9, 6);
-            $table->timestamp('time');
+            $table->dateTime('time');
             $table->string('contact', 15);
             $table->string('state', 10);
             $table->string('oneSignalUserId', 50)->nullable();
