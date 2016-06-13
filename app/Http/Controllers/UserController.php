@@ -28,7 +28,7 @@ class UserController extends Controller
     public function showNewUserPage()
     {
         $taxis = Taxi::whereNotIn('id', TaxiDriver::whereNotNull('taxiId')->get(['taxiId']))->get();
-        return view('newAccount', compact('taxis'));
+        return view('newaccount', compact('taxis'));
     }
 
     public function deleteUser(Request $request)
