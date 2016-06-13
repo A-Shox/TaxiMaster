@@ -11,13 +11,13 @@ class PrivilegesSeeder extends Seeder
      */
     public function run()
     {
-        (new \App\Privilege(['name'=>'Dashboard']))->save();
-        (new \App\Privilege(['name'=>'New Hire']))->save();
-        (new \App\Privilege(['name'=>'On Going Orders']))->save();
-        (new \App\Privilege(['name'=>'Order History']))->save();
-        (new \App\Privilege(['name'=>'New Account']))->save();
-        (new \App\Privilege(['name'=>'View Accounts']))->save();
-        (new \App\Privilege(['name'=>'New Taxi']))->save();
-        (new \App\Privilege(['name'=>'View Taxi']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'Dashboard']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'New Hire']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'On Going Orders']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'Order History']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'New Account']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'View Accounts']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'New Taxi']))->save();
+        (new \App\UserLevelPrivilege(['name'=>'View Taxi']))->save();
     }
 }
