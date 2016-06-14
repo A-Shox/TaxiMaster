@@ -167,7 +167,7 @@
 
                 $.get(url, function (data) {
                     $('#stateImage').show();
-                    var refreshUrl = "http://localhost:8000/taxioperator/order/state?id=" + data['id'];
+                    var refreshUrl = "http://taximaster.herokuapp.com/taxioperator/order/state?id=" + data['id'];
 
                     var interval = setInterval(function () {
                         $.get(refreshUrl, function (data) {
