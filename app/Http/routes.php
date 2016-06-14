@@ -14,6 +14,10 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+    Route::get('/test', function () {
+        return redirect("/test");
+    });
+
     Route::get('/', function () {
         if (Auth::check()) {
             return redirect("/dashboard");
