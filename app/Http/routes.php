@@ -15,7 +15,7 @@
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('/test', function () {
-        return redirect("/test");
+        return View::make('test');
     });
 
     Route::get('/', function () {
