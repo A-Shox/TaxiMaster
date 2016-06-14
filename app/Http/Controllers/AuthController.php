@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
 use Illuminate\Support\MessageBag;
+use App\Http\Controllers\DriverController;
 
 class AuthController extends Controller
 {
@@ -58,5 +59,12 @@ class AuthController extends Controller
         finally{
             return redirect("/login");
         }
+    }
+
+    public function logoutDriver(Request $request)
+    {
+        $dc = new DriverController;
+        $dc->updateState($request);
+        return $dc->updateLocation($request);
     }
 }

@@ -108,4 +108,21 @@ class UserController extends Controller
         }
         return redirect('/accounts/view');
     }
+
+    public function changePassword(Request $request)
+    {
+        $username = $request->username;
+        $oldPassword = $request->oldPassword;
+        $newPassword = $request->newPassword;
+
+        $user = User::where('username', $username)->first();
+
+        if (Auth::attempt(['username' => $username, 'password' => $oldPassword])) {
+            $user->password = Hash::make($newPassword);
+            $user->save();
+            return array('success' => 0);
+        } else {
+            return array('success' => 1);
+        }
+    }
 }
