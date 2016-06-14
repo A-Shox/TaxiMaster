@@ -119,7 +119,7 @@ class CustomerController extends Controller
 
         $oneSignalUserId = TaxiDriver::find($driverId)->oneSignalUserId;
 
-        $response = OneSignalController::sendMessage($title, $message, $data, $oneSignalUserId, 'DRIVER');
+        $response = OneSignalController::sendMessage($title, $message, $data, $oneSignalUserId);
 
         if (!isset($response['errors'])) {
             return array('success' => true, 'id' => $newOrder->id);

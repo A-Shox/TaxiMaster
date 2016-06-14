@@ -24,7 +24,7 @@ class DriverController extends Controller
         if($stateId==3){
             $orderId = $request->orderId;
             $receiverId = NewOrder::find($orderId)->oneSignalUserId;
-            $response = OneSignalController::sendMessage("Hire update", "Driver started to come", array('notificationType' => 'now', 'id' => $orderId), $receiverId, 'CUSTOMER');
+            $response = OneSignalController::sendMessage("Hire update", "Driver started to come", array('notificationType' => 'now', 'id' => $orderId), $receiverId);
 
             $newOrder = NewOrder::find($orderId);
             $newOrder->state = "NOW";
@@ -76,7 +76,7 @@ class DriverController extends Controller
             $data['notificationType'] = 'driverResponse';
             $data['id'] = $orderId;
 
-            $response = OneSignalController::sendMessage($title, $message, $data, $receiverId, 'CUSTOMER');
+            $response = OneSignalController::sendMessage($title, $message, $data, $receiverId);
 
             if (!isset($response['errors'])) {
                 return array('success' => true);
