@@ -38,8 +38,7 @@ class OrderController extends Controller
             return view('login');
         }
     }
-
-
+    
     public function getOngoingOrders(Request $request)
     {
         if(isset($request->now)){

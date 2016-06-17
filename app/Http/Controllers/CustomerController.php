@@ -10,7 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\OneSignalController;
 use Illuminate\Support\MessageBag;
 
-class CustomerController extends Controller
+gitclass CustomerController extends Controller
 {
     public function getAvailableTaxis(Request $request)
     {

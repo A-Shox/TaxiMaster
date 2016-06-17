@@ -9,21 +9,18 @@ class AuthControllerTest extends TestCase
 {
     public function testLoginDriver()
     {
-        $this->post('/driver/login', ['username' => 'anuradha', 'password' => 'anuradha1234', 'userType' => 'DRIVER'])
+        $this->post('/driver/login', ['username' => 'anuradha', 'password' => 'anuradha1234'])
             ->seeJson([
                 'success' => 0,
             ]);
     }
 
-//    public function testLoginWeb()
-//    {
-//        $this->post('/login', ['username' => 'admin', 'password'=>'admin1234'])
-//            ->seePageIs('/dashboard');
-//    }
-
-    public function testLogoutWeb()
+    public function testLogoutDriver()
     {
-        $response = $this->action('GET', 'AuthController@logoutWeb');
-        $this->assertRedirectedTo('login');
+        $this->post('/driver/logout', ['id' => 2, 'latitude'=>0, 'longitude'=>0, 'stateId'=>1])
+            ->seeJson([
+                'success' => true,
+            ]);
     }
+
 }
